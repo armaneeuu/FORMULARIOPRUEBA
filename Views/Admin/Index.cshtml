@@ -1,0 +1,38 @@
+@model IEnumerable<FORMULARIOPRUEBA.Models.Prueba>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section id="catalogue" class="catalogue section-bg">
+    <div class="container">
+        <div class="section-title">
+            <h2 data-aos="fade-in">CASOS REGISTRADOS</h2>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Titulo)
+                    </th>
+                    <th></th> <!-- Columna vacía para los botones -->
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Titulo)
+                    </td>
+                    <td class="text-right d-flex justify-content-end"> <!-- Flexbox para alineación -->
+                        <a class="btn btn-primary mx-1" asp-action="Edit" asp-route-id="@item.Id">Modificar</a>
+                        <a class="btn btn-success mx-1" asp-action="Details" asp-route-id="@item.Id">Detalles</a>
+                        <a class="btn btn-danger mx-1" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</section>

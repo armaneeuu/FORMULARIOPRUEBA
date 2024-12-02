@@ -1,0 +1,76 @@
+@model FORMULARIOPRUEBA.Models.Prueba
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>CREAR CASO</h1>
+
+<h4>Formulario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Sinopsis" class="control-label"></label>
+                <textarea asp-for="Sinopsis" class="form-control"></textarea>
+                <span asp-validation-for="Sinopsis" class="text-danger"></span>
+            </div>
+
+            <h3>Estados</h3>
+            <div id="estadosContainer">
+                <div class="form-group">
+                    <label for="Estados_0_Nombre">Estado</label>
+                    <p><input type="text" name="Estados[0].Numero" class="form-control" placeholder="Ingrese el número del estado" /></p>
+
+                    <label for="Estados_0_Nombre">Nombre</label>
+                    <p></p><input type="text" name="Estados[0].Nombre" class="form-control" placeholder="Ingrese el nombre del estado" /></p>
+                    
+                    <label for="Estados_0_Descripcion">Descripción del Estado</label>
+                    <p><input type="text" name="Estados[0].Descripcion" class="form-control" placeholder="Ingrese la descripción del estado" /></p>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button type="button" class="btn btn-secondary" id="addEstadoButton">Agregar Estado</button>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Regresar a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        let estadoCount = 1;
+
+        document.getElementById("addEstadoButton").onclick = function() {
+            let newEstadoInput = document.createElement("div");
+            newEstadoInput.classList.add("form-group");
+            newEstadoInput.innerHTML = `
+                <label for="Estados_${estadoCount}_Nombre">Estado ${estadoCount + 1}: Nombre del Estado</label>
+                <input type="text" name="Estados[${estadoCount}].Nombre" class="form-control" placeholder="Ingrese el nombre del estado" />
+
+                <label for="Estados_${estadoCount}_Descripcion">Descripción del Estado</label>
+                <input type="text" name="Estados[${estadoCount}].Descripcion" class="form-control" placeholder="Ingrese la descripción del estado" />
+            `;
+            document.getElementById("estadosContainer").appendChild(newEstadoInput);
+            estadoCount++;
+        };
+    </script>
+}

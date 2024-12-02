@@ -1,0 +1,40 @@
+@model IEnumerable<FORMULARIOPRUEBA.Models.Prueba>
+@{
+    ViewData["Title"] = "Formulario";
+}
+<section id="catalogue" class="catalogue section-bg">
+    <div class="container">
+        <div class="section-title">
+            <h2 data-aos="fade-in">CASOS</h2>
+        </div>
+
+        <p>
+            <a class="btn btn-primary" asp-action="Create">Crear nuevo</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Titulo)
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Modificar</a>
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                        </td>
+                        <td style="width: 1000px;">
+                            @Html.DisplayFor(modelItem => item.Titulo)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
