@@ -61,62 +61,114 @@ namespace FORMULARIOPRUEBA.Controllers
         // POST: Admin/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-[ValidateAntiForgeryToken]
-public IActionResult Create(Prueba prueba)
+        
+        // GET: Admin/Edit/5
+        // GET: Edit
+[HttpGet]
+public async Task<IActionResult> Edit(int? id)
 {
-    if (ModelState.IsValid)
+    if (id == null)
     {
-        // Guardar la entidad Prueba
-        _context.DataPrueba.Add(prueba);
-        _context.SaveChanges();
+        return NotFound();
+    }
 
-        // Guardar los estados asociados con esta prueba
-        for (int i = 0; i < prueba.Estados.Count; i++)
-        {
-            // Asignar el nombre a cada estado como "Estado X"
-            prueba.Estados[i].Nombre = "Estado " + (i + 1);
-            prueba.Estados[i].PruebaId = prueba.Id; // Asociar cada estado con la prueba
-            _context.DataEstados.Add(prueba.Estados[i]);
-        }
+    var prueba = await _context.DataPrueba
+        .Include(p => p.Estados)
+        .FirstOrDefaultAsync(m => m.Id == id);
 
-        _context.SaveChanges();
-
-        return RedirectToAction(nameof(Index));
+    if (prueba == null)
+    {
+        return NotFound();
     }
 
     return View(prueba);
 }
 
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Edit(int id, Prueba prueba, List<IFormFile> upload)
+{
+    if (id != prueba.Id)
+    {
+        return NotFound();
+    }
 
-
-
-        // GET: Admin/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+    if (ModelState.IsValid)
+    {
+        try
         {
-            Prueba objFormulario = _context.DataPrueba.Find(id);
-            if (objFormulario == null)
+            // Handle file upload
+            if (upload != null && upload.Count > 0)
+            {
+                foreach (var up in upload)
+                {
+                    using (var str = up.OpenReadStream())
+                    {
+                        using (var br = new BinaryReader(str))
+                        {
+                            prueba.Imagen = br.ReadBytes((Int32)str.Length);
+                            prueba.ImagenName = Path.GetFileName(up.FileName);
+                        }
+                    }
+                }
+            }
+
+            // Update the main Prueba entity
+            _context.Update(prueba);
+            await _context.SaveChangesAsync();
+
+            // Handle associated Estados
+            if (prueba.Estados != null)
+            {
+                // Remove existing estados that are not in the current list
+                var existingEstados = _context.DataEstados.Where(e => e.PruebaId == prueba.Id);
+                _context.DataEstados.RemoveRange(existingEstados.Where(e => 
+                    !prueba.Estados.Any(ne => ne.Id == e.Id)));
+
+                // Update or add new estados
+                foreach (var estado in prueba.Estados)
+                {
+                    estado.PruebaId = prueba.Id;
+
+                    if (estado.Id == 0)
+                    {
+                        // New estado
+                        _context.DataEstados.Add(estado);
+                    }
+                    else
+                    {
+                        // Existing estado
+                        _context.Update(estado);
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!PruebaExists(prueba.Id))
             {
                 return NotFound();
             }
-            return View(objFormulario);
+            else
+            {
+                throw;
+            }
         }
+    }
 
-        // POST: Admin/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,Titulo,Sinopsis,Estado1,Estado2,Estado3")] Prueba objFormulario)
-        {
-            _context.Update(objFormulario);
-            _context.SaveChanges();
-            ViewData["Message"] = "El formulario ya esta actualizado";
-            return View(objFormulario);
-        }
+    return View(prueba);
+}
 
-        // GET: Admin/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+private bool PruebaExists(int id)
+{
+    return _context.DataPrueba.Any(e => e.Id == id);
+}
+
+public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -132,7 +184,6 @@ public IActionResult Create(Prueba prueba)
 
             return View(formulario);
         }
-
         // POST: Admin/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -174,6 +225,10 @@ public IActionResult Create(Prueba prueba)
             <h2>Estado {estado.Numero}: {estado.Nombre}</h2>
             <p>{estado.Descripcion}</p>");
     }
+    string imageSection = formulario.Imagen != null 
+    ? $"<div class='image-container'><img src='data:image/png;base64,{Convert.ToBase64String(formulario.Imagen)}' alt='Imagen de {formulario.Titulo}' style='width: 300px; height: auto;' /></div>" 
+    : "";
+
 
     var htmlContent = $@"
 <!DOCTYPE html>
@@ -221,6 +276,8 @@ public IActionResult Create(Prueba prueba)
 
         <h1>Estados</h1>
         {estadosHtml}
+
+        {imageSection}
     </section>
 </body>
 </html>";

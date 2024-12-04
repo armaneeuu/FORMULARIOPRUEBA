@@ -1,34 +1,101 @@
-@model FORMULARIOPRUEBA.Models.Prueba;
+@model FORMULARIOPRUEBA.Models.Prueba
+
 @{
-        ViewData["Title"] = "Formulario";
+    ViewData["Title"] = "Modificar";
 }
 
-<div class="text-center">
-        <h1>@ViewData["Title"]</h1>
-</div>
+<h1>MODIFICAR CASO</h1>
 
-<div class="text-left">
-        <h1 class="display-4"></h1>
+<h4>Formulario</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-        <form asp-controller="Formulario" asp-action="Edit">
-                <input type="hidden" asp-form="Id" />
-                <div class="form-group formM">
-                        <label asp-for="Titulo" class="form-label"></label>
-                        <input asp-for="Titulo" class="form-control form-control-sm" type="text"
-                                placeholder="Escribe el título" aria-label=".form-control-sm" />
-                </div>
-                <div class="form-group formM">
-                        <label asp-for="Sinopsis" class="form-label"></label>
-                        <textarea asp-for="Sinopsis" class="form-control" cols="30" rows="10"></textarea>
-                </div>
-                
-                <h1></h1>
-                <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Actualizar</button>
-                </div>
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Sinopsis" class="control-label"></label>
+                <textarea asp-for="Sinopsis" class="form-control"></textarea>
+                <span asp-validation-for="Sinopsis" class="text-danger"></span>
+            </div>
+
+            <h3>Estados</h3>
+            <div id="estadosContainer">
+                @for (int i = 0; i < Model.Estados.Count; i++)
+                {
+                    <div class="form-group">
+                        <input type="hidden" name="Estados[@i].Id" value="@Model.Estados[i].Id" />
+                        <input type="hidden" name="Estados[@i].PruebaId" value="@Model.Estados[i].PruebaId" />
+
+                        <label for="Estados_@(i)_Numero">Número</label>
+                        <input type="text" name="Estados[@i].Numero" class="form-control" 
+                               value="@Model.Estados[i].Numero"
+                               placeholder="Ingrese el número del estado" />
+
+                        <label for="Estados_@(i)_Nombre">Nombre</label>
+                        <input type="text" name="Estados[@i].Nombre" class="form-control" 
+                               value="@Model.Estados[i].Nombre"
+                               placeholder="Ingrese el nombre del estado" />
+
+                        <label for="Estados_@(i)_Descripcion">Descripción del Estado</label>
+                        <input type="text" name="Estados[@i].Descripcion" class="form-control" 
+                               value="@Model.Estados[i].Descripcion"
+                               placeholder="Ingrese la descripción del estado" />
+                    </div>
+                }
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-secondary" id="addEstadoButton">Agregar Estado</button>
+            </div>
+
+            <div>
+                <label type="button" id="custom-button">Cargar Imagen</label>
+                <input type="file" id="upload" name="upload" />
+                @if (!string.IsNullOrEmpty(Model.ImagenName))
+                {
+                    <p>Imagen actual: @Model.ImagenName</p>
+                }
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
+            </div>
         </form>
-        <h1>@ViewData["Message"]</h1>
-        <div>
-                <a class="btn btn-primary" asp-action="Index2">Regresar a la lista</a>
-        </div>
+    </div>
 </div>
+
+<div>
+    <a asp-action="Index">Regresar a la lista</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        let estadoCount = @Model.Estados.Count;
+
+        document.getElementById("addEstadoButton").onclick = function() {
+            let newEstadoInput = document.createElement("div");
+            newEstadoInput.classList.add("form-group");
+            newEstadoInput.innerHTML = `
+                <label for="Estados_${estadoCount}_Numero">Número del Estado</label>
+                <input type="number" name="Estados[${estadoCount}].Numero" class="form-control" placeholder="Ingrese el número del estado" />
+
+                <label for="Estados_${estadoCount}_Nombre">Estado ${estadoCount + 1}: Nombre del Estado</label>
+                <input type="text" name="Estados[${estadoCount}].Nombre" class="form-control" placeholder="Ingrese el nombre del estado" />
+
+                <label for="Estados_${estadoCount}_Descripcion">Descripción del Estado</label>
+                <input type="text" name="Estados[${estadocount}].Descripcion" class="form-control" placeholder="Ingrese la descripción del estado" />
+            `;
+            document.getElementById("estadosContainer").appendChild(newEstadoInput);
+            estadoCount++;
+        };
+    </script>
+}

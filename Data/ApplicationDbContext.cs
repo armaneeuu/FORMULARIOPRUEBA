@@ -24,5 +24,6 @@ public class ApplicationDbContext : IdentityDbContext
         .HasForeignKey(e => e.PruebaId)
         .OnDelete(DeleteBehavior.Cascade);
         }
+    
 }
 

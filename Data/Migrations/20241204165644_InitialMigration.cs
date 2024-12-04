@@ -57,8 +57,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    titulo = table.Column<string>(type: "text", nullable: false),
-                    sinopsis = table.Column<string>(type: "text", nullable: false)
+                    titulo = table.Column<string>(type: "text", nullable: true),
+                    sinopsis = table.Column<string>(type: "text", nullable: true),
+                    Imagen = table.Column<byte[]>(type: "bytea", nullable: true),
+                    imagename = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -177,9 +179,9 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    descripcion = table.Column<string>(type: "text", nullable: false),
+                    descripcion = table.Column<string>(type: "text", nullable: true),
                     Numero = table.Column<int>(type: "integer", nullable: false),
-                    Nombre = table.Column<string>(type: "text", nullable: false),
+                    Nombre = table.Column<string>(type: "text", nullable: true),
                     PruebaId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

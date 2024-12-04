@@ -15,12 +15,18 @@ namespace FORMULARIOPRUEBA.Models
         public int Id { get; set; }
 
         [Column("titulo")]
-        public string Titulo { get; set; }
+        public string? Titulo { get; set; }
 
         [Column("sinopsis")]
-        public string Sinopsis { get; set; }
+        public string? Sinopsis { get; set; }
 
-        [NotMapped] // No mapeado a la base de datos si no quieres guardar como tabla aparte
-        public List<Estados> Estados { get; set; } 
+        
+        public List<Estados>? Estados { get; set; } 
+
+        [Column("Imagen")]
+        public Byte[]? Imagen { get; set; }
+        [Column("imagename")]
+        public String? ImagenName { get; set; }
+        
     }
 }

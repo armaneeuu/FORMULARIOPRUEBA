@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FORMULARIOPRUEBA.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241202232008_InitialMigration")]
+    [Migration("20241204165644_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -34,12 +34,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("descripcion");
 
                     b.Property<string>("Nombre")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("Numero")
@@ -64,13 +62,19 @@ namespace FORMULARIOPRUEBA.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<byte[]>("Imagen")
+                        .HasColumnType("bytea")
+                        .HasColumnName("Imagen");
+
+                    b.Property<string>("ImagenName")
+                        .HasColumnType("text")
+                        .HasColumnName("imagename");
+
                     b.Property<string>("Sinopsis")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("sinopsis");
 
                     b.Property<string>("Titulo")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("titulo");
 
