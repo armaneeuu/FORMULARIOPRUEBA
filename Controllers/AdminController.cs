@@ -41,7 +41,9 @@ namespace FORMULARIOPRUEBA.Controllers
             }
 
             var formulario = await _context.DataPrueba
-                .Include(p => p.Estados) // Incluir los estados relacionados
+                .Include(p => p.Estados) 
+                .Include(p => p.Estadosa)
+                .Include(p => p.Dialogo)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (formulario == null)
             {
@@ -95,7 +97,10 @@ namespace FORMULARIOPRUEBA.Controllers
 
             var prueba = await _context.DataPrueba
                 .Include(p => p.Estados)
+                .Include(p => p.Estadosa)
+                .Include(p => p.Dialogo)
                 .FirstOrDefaultAsync(m => m.Id == id);
+            
 
             if (prueba == null)
             {
@@ -188,7 +193,74 @@ namespace FORMULARIOPRUEBA.Controllers
 
                         await _context.SaveChangesAsync();
                     }
+                    if (prueba.Estadosa != null)
+                    {
+                        // Get existing estados for this Prueba
+                        var existingEstados = await _context.DataEstadosa
+                            .Where(e => e.PruebaId == prueba.Id)
+                            .ToListAsync();
 
+                        // Remove estados that are not in the current list
+                        var estadosToRemove = existingEstados
+                            .Where(existing => !prueba.Estadosa.Any(current =>
+                                current.Id == existing.Id))
+                            .ToList();
+
+                        _context.DataEstadosa.RemoveRange(estadosToRemove);
+
+                        // Update or add new estados
+                        foreach (var estadoa in prueba.Estadosa)
+                        {
+                            estadoa.PruebaId = prueba.Id;
+
+                            if (estadoa.Id == 0)
+                            {
+                                // New estado
+                                _context.DataEstadosa.Add(estadoa);
+                            }
+                            else
+                            {
+                                // Existing estado
+                                _context.Update(estadoa);
+                            }
+                        }
+
+                        await _context.SaveChangesAsync();
+                    }
+                    if (prueba.Dialogo != null)
+                    {
+                        // Get existing estados for this Prueba
+                        var existingDialogo = await _context.DataDialogo
+                            .Where(e => e.PruebaId == prueba.Id)
+                            .ToListAsync();
+
+                        // Remove estados that are not in the current list
+                        var dialogoToRemove = existingDialogo
+                            .Where(existing => !prueba.Dialogo.Any(current =>
+                                current.Id == existing.Id))
+                            .ToList();
+
+                        _context.DataDialogo.RemoveRange(dialogoToRemove);
+
+                        // Update or add new estados
+                        foreach (var dialogo in prueba.Dialogo)
+                        {
+                            dialogo.PruebaId = prueba.Id;
+
+                            if (dialogo.Id == 0)
+                            {
+                                // New estado
+                                _context.DataDialogo.Add(dialogo);
+                            }
+                            else
+                            {
+                                // Existing estado
+                                _context.Update(dialogo);
+                            }
+                        }
+
+                        await _context.SaveChangesAsync();
+                    }
                     return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
@@ -249,7 +321,8 @@ namespace FORMULARIOPRUEBA.Controllers
         public IActionResult ExportPdf(int id)
         {
             var formulario = _context.DataPrueba
-                .Include(f => f.Estados) // Asegúrate de incluir los Estados
+                .Include(f => f.Estados) 
+                .Include(f => f.Estadosa) 
                 .FirstOrDefault(f => f.Id == id);
 
             if (formulario == null)
@@ -268,6 +341,15 @@ namespace FORMULARIOPRUEBA.Controllers
             <h2>Estado {estado.Numero}: {estado.Nombre}</h2>
             <p>{estado.Descripcion}</p>");
             }
+
+            var estadosaHtml = new StringBuilder();
+            foreach (var estadoa in formulario.Estadosa)
+            {
+                estadosaHtml.AppendLine($@"
+            <h2>Estado {estadoa.Numero}: {estadoa.Nombre}</h2>
+            <p>{estadoa.Descripcion}</p>");
+            }
+
             string imageSection = formulario.Imagen != null
             ? $"<div class='image-container'><img src='data:image/png;base64,{Convert.ToBase64String(formulario.Imagen)}' alt='Imagen de {formulario.Titulo}' style='width: 300px; height: auto;' /></div>"
             : "";
@@ -398,6 +480,9 @@ namespace FORMULARIOPRUEBA.Controllers
 
         <h2>Baseline</h2>
         <p>{formulario.Baseline.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h1>Estados</h1>
+        {estadosaHtml}
 
     </section>
 </body>

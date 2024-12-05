@@ -192,6 +192,74 @@
                 <span asp-validation-for="Baseline" class="text-danger"></span>
             </div>
 
+            <h3>Estados</h3>
+            <div id="estadosaContainer">
+                @for (int i = 0; i < Model.Estadosa.Count; i++)
+                {
+                    <div class="form-group">
+                        <input type="hidden" name="Estadosa[@i].Id" value="@Model.Estadosa[i].Id" />
+                        <input type="hidden" name="Estadosa[@i].PruebaId" value="@Model.Estadosa[i].PruebaId" />
+
+                        <label for="Estadosa_@(i)_Numero">Número</label>
+                        <input type="text" name="Estadosa[@i].Numero" class="form-control" 
+                               value="@Model.Estadosa[i].Numero"
+                               placeholder="Ingrese el número del estado" />
+
+                        <label for="Estadosa_@(i)_Nombre">Nombre</label>
+                        <input type="text" name="Estadosa[@i].Nombre" class="form-control" 
+                               value="@Model.Estadosa[i].Nombre"
+                               placeholder="Ingrese el nombre del estado" />
+
+                        <label for="Estadosa_@(i)_Descripcion">Descripción del Estado</label>
+                        <input type="text" name="Estadosa[@i].Descripcion" class="form-control" 
+                               value="@Model.Estadosa[i].Descripcion"
+                               placeholder="Ingrese la descripción del estado" />
+                    </div>
+                }
+            </div>
+            
+            <div class="form-group">
+                <button type="button" class="btn btn-secondary" id="addEstadoaButton">Agregar Estado</button>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Preguntas_de_preparacion" class="control-label"></label>
+                <textarea asp-for="Preguntas_de_preparacion" class="form-control"></textarea>
+                <span asp-validation-for="Preguntas_de_preparacion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Equipos_de_suministro" class="control-label"></label>
+                <textarea asp-for="Equipos_de_suministro" class="form-control"></textarea>
+                <span asp-validation-for="Equipos_de_suministro" class="text-danger"></span>
+            </div>
+
+            <h3>Diálogo</h3>
+            <div id="dialogoContainer">
+                @for (int i = 0; i < Model.Dialogo.Count; i++)
+                {
+                    <div class="form-group">
+                        <input type="hidden" name="Dialogo[@i].Id" value="@Model.Dialogo[i].Id" />
+                        <input type="hidden" name="Dialogo[@i].PruebaId" value="@Model.Dialogo[i].PruebaId" />
+
+                        <label for="Dialogo_@(i)_Personaje">Personaje</label>
+                        <input type="text" name="Dialogo[@i].Personaje" class="form-control" 
+                               value="@Model.Dialogo[i].Personaje"
+                               placeholder="Ingrese el nombre del personaje" />
+
+                        <label for="Dialogo_@(i)_Guion">Guión</label>
+                        <input type="text" name="Dialogo[@i].Guion" class="form-control" 
+                               value="@Model.Dialogo[i].Guion"
+                               placeholder="Ingrese el guión del personaje" />
+
+                    </div>
+                }
+            </div>
+            
+            <div class="form-group">
+                <button type="button" class="btn btn-secondary" id="addDialogoButton">Agregar Diálogo</button>
+            </div>
+
             <div class="form-group">
                 <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
             </div>
@@ -223,6 +291,40 @@
             `;
             document.getElementById("estadosContainer").appendChild(newEstadoInput);
             estadoCount++;
+        };
+        let estadoaCount = @Model.Estadosa.Count;
+
+        document.getElementById("addEstadoaButton").onclick = function() {
+            let newEstadoInput = document.createElement("div");
+            newEstadoInput.classList.add("form-group");
+            newEstadoInput.innerHTML = `
+                <label for="Estadosa_${estadoaCount}_Numero">Número del Estado</label>
+                <input type="number" name="Estadosa[${estadoaCount}].Numero" class="form-control" placeholder="Ingrese el número del estado" />
+
+                <label for="Estadosa_${estadoaCount}_Nombre">Estado ${estadoaCount + 1}: Nombre del Estado</label>
+                <input type="text" name="Estadosa[${estadoaCount}].Nombre" class="form-control" placeholder="Ingrese el nombre del estado" />
+
+                <label for="Estadosa_${estadoaCount}_Descripcion">Descripción del Estado</label>
+                <input type="text" name="Estadosa[${estadoaCount}].Descripcion" class="form-control" placeholder="Ingrese la descripción del estado" />
+            `;
+            document.getElementById("estadosaContainer").appendChild(newEstadoInput);
+            estadoaCount++;
+        };
+        let dialogoCount = @Model.Dialogo.Count;
+
+        document.getElementById("addDialogoButton").onclick = function() {
+            let newDialogoInput = document.createElement("div");
+            newDialogoInput.classList.add("form-group");
+            newDialogoInput.innerHTML = `
+                <label for="Dialogo_${dialogoCount}_Personaje">Personaje</label>
+                <input type="text" name="Dialogo[${dialogoCount}].Personaje" class="form-control" placeholder="Ingrese el nombre del personaje" />
+
+                <label for="Dialogo_${dialogoCount}_Guion">Guion</label>
+                <input type="text" name="Dialogo[${dialogoCount}].Guion" class="form-control" placeholder="Ingrese el guión del personaje" />
+
+            `;
+            document.getElementById("dialogoContainer").appendChild(newDialogoInput);
+            dialogoCount++;
         };
     </script>
 }

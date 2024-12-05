@@ -101,5 +101,13 @@ namespace FORMULARIOPRUEBA.Models
 
         [Column("baseline")]
         public string? Baseline { get; set; }
+
+        [Column("preguntas_de_preparacion")]
+        public string? Preguntas_de_preparacion { get; set; }
+
+        [Column("equipos_de_suministro")]
+        public string? Equipos_de_suministro { get; set; }
+
+        public List<Dialogo>? Dialogo { get; set; }
     }
 }

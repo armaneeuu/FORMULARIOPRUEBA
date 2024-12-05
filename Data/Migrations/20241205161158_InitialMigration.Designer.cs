@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FORMULARIOPRUEBA.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241205084407_InitialMigrations")]
-    partial class InitialMigrations
+    [Migration("20241205161158_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,30 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("FORMULARIOPRUEBA.Models.Dialogo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Guion")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Personaje")
+                        .HasColumnType("text");
+
+                    b.Property<int>("PruebaId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PruebaId");
+
+                    b.ToTable("t_dialogo");
+                });
 
             modelBuilder.Entity("FORMULARIOPRUEBA.Models.Estados", b =>
                 {
@@ -122,6 +146,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("distinguir");
 
+                    b.Property<string>("Equipos_de_suministro")
+                        .HasColumnType("text")
+                        .HasColumnName("equipos_de_suministro");
+
                     b.Property<string>("Estado_general")
                         .HasColumnType("text")
                         .HasColumnName("estado_general");
@@ -181,6 +209,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     b.Property<string>("Piel")
                         .HasColumnType("text")
                         .HasColumnName("piel");
+
+                    b.Property<string>("Preguntas_de_preparacion")
+                        .HasColumnType("text")
+                        .HasColumnName("preguntas_de_preparacion");
 
                     b.Property<string>("Signos_vitales")
                         .HasColumnType("text")
@@ -407,6 +439,17 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("FORMULARIOPRUEBA.Models.Dialogo", b =>
+                {
+                    b.HasOne("FORMULARIOPRUEBA.Models.Prueba", "Prueba")
+                        .WithMany("Dialogo")
+                        .HasForeignKey("PruebaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prueba");
+                });
+
             modelBuilder.Entity("FORMULARIOPRUEBA.Models.Estados", b =>
                 {
                     b.HasOne("FORMULARIOPRUEBA.Models.Prueba", "Prueba")
@@ -482,6 +525,8 @@ namespace FORMULARIOPRUEBA.Data.Migrations
 
             modelBuilder.Entity("FORMULARIOPRUEBA.Models.Prueba", b =>
                 {
+                    b.Navigation("Dialogo");
+
                     b.Navigation("Estados");
 
                     b.Navigation("Estadosa");

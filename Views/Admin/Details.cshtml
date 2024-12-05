@@ -3,34 +3,48 @@
 @{
     ViewData["Title"] = "Detalles";
 }
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
 
+    td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: center;
+    }
+</style>
 <h1>DETALLES DEL CASO</h1>
 
 <div class="row">
 
-    
+
     <dl class="row">
-        <dt class="col-12"><h4>Título</h4></dt>
+        <dt class="col-12">
+            <h4>Título</h4>
+        </dt>
         <dd class="col-12">@Model.Titulo</dd>
 
         <h4>Resumen del caso</h4>
-    <hr />
-        
+        using iText.Layout.Element;
+        <hr />
+
         <dt class="col-12">Sinopsis</dt>
         <dd class="col-12">
             @Html.Raw(Model.Sinopsis.Replace(Environment.NewLine, "<br />"))
         </dd>
 
-<dt class="col-12">Estados</dt>
-    
-    @foreach (var estado in Model.Estados)
-    {
+        <dt class="col-12">Estados</dt>
 
-        <dt class="col-12">Estado @estado.Numero : @estado.Nombre</dt>
+        @foreach (var estado in Model.Estados)
+        {
 
-        <dd class="col-12">@estado.Descripcion<br /></dd>
+            <dt class="col-12">Estado @estado.Numero : @estado.Nombre</dt>
 
-    }
+            <dd class="col-12">@estado.Descripcion<br /></dd>
+
+        }
         @if (!string.IsNullOrEmpty(Model.ImagenName))
         {
             <dt class="col-12">Flujograma</dt>
@@ -87,7 +101,7 @@
 
         <dt class="col-12">Abdomen</dt>
         <dd class="col-12">@Model.Abdomen</dd>
-        
+
         <dt class="col-12">Laboratorio</dt>
         <dd class="col-12">@Model.Laboratorio</dd>
 
@@ -131,10 +145,34 @@
         <dt class="col-12">Baseline</dt>
         <dd class="col-12">@Model.Baseline</dd>
     </dl>
+    <dt class="col-12">Estados</dt>
 
-    
+    @foreach (var estadoa in Model.Estadosa)
+    {
+
+        <dt class="col-12">Estado @estadoa.Numero : @estadoa.Nombre</dt>
+
+        <dd class="col-12">@estadoa.Descripcion<br /></dd>
+
+    }
 
 
+    <h3>Dialogo</h3>
+    <table>
+        <tr>
+            <td style="background-color: yellow;">Personaje</td>
+            <td style="background-color: yellow;">Guión</td>
+        </tr>
+        @foreach (var dialogo in Model.Dialogo)
+        {
+
+            <tr>
+                <td>@dialogo.Personaje</td>
+                <td>@dialogo.Guion</td>
+            </tr>
+
+        }
+    </table>
 
 </div>
 

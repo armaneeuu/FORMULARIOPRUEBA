@@ -196,6 +196,34 @@
             <div class="form-group">
                 <button type="button" class="btn btn-secondary" id="addEstadoaButton">Agregar Estado</button>
             </div>
+            <div class="form-group">
+                <label asp-for="Preguntas_de_preparacion" class="control-label"></label>
+                <textarea asp-for="Preguntas_de_preparacion" class="form-control"></textarea>
+                <span asp-validation-for="Preguntas_de_preparacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Equipos_de_suministro" class="control-label"></label>
+                <textarea asp-for="Equipos_de_suministro" class="form-control"></textarea>
+                <span asp-validation-for="Equipos_de_suministro" class="text-danger"></span>
+            </div>
+
+            <h3>Diálogo</h3>
+            <div id="dialogoContainer">
+                <div class="form-group">
+                    <label for="Dialogo_0_Personaje">Personaje</label>
+                    <input type="text" name="Dialogo[0].Personaje" class="form-control"
+                        placeholder="Ingrese el número del estado" />
+
+                    <label for="Dialogo_0_Guion">Guión</label>
+                    <input type="text" name="Dialogo[0].Guion" class="form-control"
+                        placeholder="Ingrese el nombre del estado" />
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-secondary" id="addDialogoButton">Agregar Dialogo</button>
+            </div>
 
             <div class="form-group">
                 <input type="submit" value="Crear" class="btn btn-primary" />
@@ -247,6 +275,23 @@
             `;
             document.getElementById("estadosaContainer").appendChild(newEstadoaInput);
             estadoaCount++;
+        };
+
+        let dialogoCount = 1;
+
+        document.getElementById("addDialogoButton").onclick = function() {
+            let newDialogoInput = document.createElement("div");
+            newDialogoInput.classList.add("form-group");
+            newDialogoInput.innerHTML = `
+                <label for="Dialogo_${dialogoCount}_Personaje">Personaje</label>
+                <input type="text" name="Dialogo[${dialogoCount}].Personaje" class="form-control" placeholder="Ingrese el nombre del personaje" />
+
+                <label for="Dialogo_${dialogoCount}_Guion">Guion</label>
+                <input type="text" name="Dialogo[${dialogoCount}].Guion" class="form-control" placeholder="Ingrese el guión del personaje" />
+
+            `;
+            document.getElementById("dialogoContainer").appendChild(newDialogoInput);
+            dialogoCount++;
         };
     </script>
 }

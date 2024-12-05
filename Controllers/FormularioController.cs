@@ -106,6 +106,20 @@ namespace FORMULARIOPRUEBA.Controllers
 
                     await _context.SaveChangesAsync();
                 }
+                if (prueba.Dialogo != null && prueba.Dialogo.Count > 0)
+                {
+                    foreach (var dialogo in prueba.Dialogo)
+                    {
+                        dialogo.PruebaId = prueba.Id;
+
+                        if (dialogo.Id == 0)
+                        {
+                            _context.DataDialogo.Add(dialogo);
+                        }
+                    }
+
+                    await _context.SaveChangesAsync();
+                }
 
                 return RedirectToAction(nameof(Index2));
             }
@@ -128,6 +142,8 @@ namespace FORMULARIOPRUEBA.Controllers
 
             var prueba = await _context.DataPrueba
                 .Include(p => p.Estados)
+                .Include(p => p.Estadosa)
+                .Include(p => p.Dialogo)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             if (prueba == null)
@@ -216,6 +232,74 @@ namespace FORMULARIOPRUEBA.Controllers
                             {
                                 // Existing estado
                                 _context.Update(estado);
+                            }
+                        }
+
+                        await _context.SaveChangesAsync();
+                    }
+                    if (prueba.Estadosa != null)
+                    {
+                        // Get existing estados for this Prueba
+                        var existingEstados = await _context.DataEstadosa
+                            .Where(e => e.PruebaId == prueba.Id)
+                            .ToListAsync();
+
+                        // Remove estados that are not in the current list
+                        var estadosToRemove = existingEstados
+                            .Where(existing => !prueba.Estadosa.Any(current =>
+                                current.Id == existing.Id))
+                            .ToList();
+
+                        _context.DataEstadosa.RemoveRange(estadosToRemove);
+
+                        // Update or add new estados
+                        foreach (var estadoa in prueba.Estadosa)
+                        {
+                            estadoa.PruebaId = prueba.Id;
+
+                            if (estadoa.Id == 0)
+                            {
+                                // New estado
+                                _context.DataEstadosa.Add(estadoa);
+                            }
+                            else
+                            {
+                                // Existing estado
+                                _context.Update(estadoa);
+                            }
+                        }
+
+                        await _context.SaveChangesAsync();
+                    }
+                    if (prueba.Dialogo != null)
+                    {
+                        // Get existing estados for this Prueba
+                        var existingEstados = await _context.DataDialogo
+                            .Where(e => e.PruebaId == prueba.Id)
+                            .ToListAsync();
+
+                        // Remove estados that are not in the current list
+                        var dialogoToRemove = existingEstados
+                            .Where(existing => !prueba.Dialogo.Any(current =>
+                                current.Id == existing.Id))
+                            .ToList();
+
+                        _context.DataDialogo.RemoveRange(dialogoToRemove);
+
+                        // Update or add new estados
+                        foreach (var dialogo in prueba.Dialogo)
+                        {
+                            dialogo.PruebaId = prueba.Id;
+
+                            if (dialogo.Id == 0)
+                            {
+                                // New estado
+                                _context.DataDialogo.Add(dialogo);
+                            }
+                            else
+                            {
+                                // Existing estado
+                                _context.Update(dialogo);
                             }
                         }
 

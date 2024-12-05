@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FORMULARIOPRUEBA.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigrations : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -84,7 +84,9 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     evaluación = table.Column<string>(type: "text", nullable: true),
                     aplicar = table.Column<string>(type: "text", nullable: true),
                     medidas_esenciales = table.Column<string>(type: "text", nullable: true),
-                    baseline = table.Column<string>(type: "text", nullable: true)
+                    baseline = table.Column<string>(type: "text", nullable: true),
+                    preguntas_de_preparacion = table.Column<string>(type: "text", nullable: true),
+                    equipos_de_suministro = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -198,6 +200,27 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "t_dialogo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Personaje = table.Column<string>(type: "text", nullable: true),
+                    Guion = table.Column<string>(type: "text", nullable: true),
+                    PruebaId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_t_dialogo", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_t_dialogo_t_prueba_PruebaId",
+                        column: x => x.PruebaId,
+                        principalTable: "t_prueba",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "t_estados",
                 columns: table => new
                 {
@@ -279,6 +302,11 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_t_dialogo_PruebaId",
+                table: "t_dialogo",
+                column: "PruebaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_t_estados_PruebaId",
                 table: "t_estados",
                 column: "PruebaId");
@@ -306,6 +334,9 @@ namespace FORMULARIOPRUEBA.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "t_dialogo");
 
             migrationBuilder.DropTable(
                 name: "t_estados");
