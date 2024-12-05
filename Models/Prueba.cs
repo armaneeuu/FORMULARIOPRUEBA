@@ -23,6 +23,8 @@ namespace FORMULARIOPRUEBA.Models
         
         public List<Estados>? Estados { get; set; } 
 
+        public List<Estadosa>? Estadosa { get; set; }
+
         [Column("Imagen")]
         public Byte[]? Imagen { get; set; }
         [Column("imagename")]

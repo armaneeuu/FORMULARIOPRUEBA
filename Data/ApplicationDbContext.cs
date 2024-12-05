@@ -13,17 +13,28 @@ public class ApplicationDbContext : IdentityDbContext
     }
     public DbSet<FORMULARIOPRUEBA.Models.Prueba> DataPrueba { get; set; }
     public DbSet<FORMULARIOPRUEBA.Models.Estados> DataEstados { get; set; }
+    public DbSet<FORMULARIOPRUEBA.Models.Estadosa> DataEstadosa { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder); // Asegúrate de llamar primero al método base
-            
-            // Configuración para la relación Prueba-Estado
-            modelBuilder.Entity<FORMULARIOPRUEBA.Models.Prueba>()
-                .HasMany(p => p.Estados)
-        .WithOne(e => e.Prueba)
-        .HasForeignKey(e => e.PruebaId)
-        .OnDelete(DeleteBehavior.Cascade);
-        }
+    {
+        base.OnModelCreating(modelBuilder); // Llamar al método base primero
+
+        // Configuración para la relación Prueba-Estados
+        modelBuilder.Entity<FORMULARIOPRUEBA.Models.Prueba>()
+            .HasMany(p => p.Estados)
+            .WithOne(e => e.Prueba)
+            .HasForeignKey(e => e.PruebaId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // Configuración para la relación Prueba-Estadosa
+        modelBuilder.Entity<FORMULARIOPRUEBA.Models.Prueba>()
+            .HasMany(p => p.Estadosa)
+            .WithOne(e => e.Prueba)
+            .HasForeignKey(e => e.PruebaId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
+
+        
+    
     
 }
 

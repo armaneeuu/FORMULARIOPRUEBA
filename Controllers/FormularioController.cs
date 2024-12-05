@@ -92,6 +92,20 @@ namespace FORMULARIOPRUEBA.Controllers
 
                     await _context.SaveChangesAsync();
                 }
+                if (prueba.Estadosa != null && prueba.Estadosa.Count > 0)
+                {
+                    foreach (var estadoa in prueba.Estadosa)
+                    {
+                        estadoa.PruebaId = prueba.Id;
+
+                        if (estadoa.Id == 0)
+                        {
+                            _context.DataEstadosa.Add(estadoa);
+                        }
+                    }
+
+                    await _context.SaveChangesAsync();
+                }
 
                 return RedirectToAction(nameof(Index2));
             }

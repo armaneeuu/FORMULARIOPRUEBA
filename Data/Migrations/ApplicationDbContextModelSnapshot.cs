@@ -50,6 +50,34 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     b.ToTable("t_estados");
                 });
 
+            modelBuilder.Entity("FORMULARIOPRUEBA.Models.Estadosa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("text")
+                        .HasColumnName("descripcion");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PruebaId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PruebaId");
+
+                    b.ToTable("t_estadosa");
+                });
+
             modelBuilder.Entity("FORMULARIOPRUEBA.Models.Prueba", b =>
                 {
                     b.Property<int>("Id")
@@ -387,6 +415,17 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     b.Navigation("Prueba");
                 });
 
+            modelBuilder.Entity("FORMULARIOPRUEBA.Models.Estadosa", b =>
+                {
+                    b.HasOne("FORMULARIOPRUEBA.Models.Prueba", "Prueba")
+                        .WithMany("Estadosa")
+                        .HasForeignKey("PruebaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prueba");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -441,6 +480,8 @@ namespace FORMULARIOPRUEBA.Data.Migrations
             modelBuilder.Entity("FORMULARIOPRUEBA.Models.Prueba", b =>
                 {
                     b.Navigation("Estados");
+
+                    b.Navigation("Estadosa");
                 });
 #pragma warning restore 612, 618
         }

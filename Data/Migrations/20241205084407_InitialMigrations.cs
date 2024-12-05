@@ -219,6 +219,28 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "t_estadosa",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    descripcion = table.Column<string>(type: "text", nullable: true),
+                    Numero = table.Column<int>(type: "integer", nullable: false),
+                    Nombre = table.Column<string>(type: "text", nullable: true),
+                    PruebaId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_t_estadosa", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_t_estadosa_t_prueba_PruebaId",
+                        column: x => x.PruebaId,
+                        principalTable: "t_prueba",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -260,6 +282,11 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                 name: "IX_t_estados_PruebaId",
                 table: "t_estados",
                 column: "PruebaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_t_estadosa_PruebaId",
+                table: "t_estadosa",
+                column: "PruebaId");
         }
 
         /// <inheritdoc />
@@ -282,6 +309,9 @@ namespace FORMULARIOPRUEBA.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "t_estados");
+
+            migrationBuilder.DropTable(
+                name: "t_estadosa");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
