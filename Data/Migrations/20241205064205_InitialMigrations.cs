@@ -65,7 +65,15 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     historial_medico = table.Column<string>(type: "text", nullable: true),
                     alergias = table.Column<string>(type: "text", nullable: true),
                     medicamentos = table.Column<string>(type: "text", nullable: true),
-                    historial_familiar = table.Column<string>(type: "text", nullable: true)
+                    historial_familiar = table.Column<string>(type: "text", nullable: true),
+                    situacion = table.Column<string>(type: "text", nullable: true),
+                    nota_de_hospitalizacion = table.Column<string>(type: "text", nullable: true),
+                    signos_vitales = table.Column<string>(type: "text", nullable: true),
+                    estado_general = table.Column<string>(type: "text", nullable: true),
+                    piel = table.Column<string>(type: "text", nullable: true),
+                    torax = table.Column<string>(type: "text", nullable: true),
+                    cv = table.Column<string>(type: "text", nullable: true),
+                    abdomen = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

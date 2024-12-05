@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FORMULARIOPRUEBA.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241205055711_InitialMigrations")]
+    [Migration("20241205064205_InitialMigrations")]
     partial class InitialMigrations
     {
         /// <inheritdoc />
@@ -62,6 +62,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Abdomen")
+                        .HasColumnType("text")
+                        .HasColumnName("abdomen");
+
                     b.Property<string>("Alergias")
                         .HasColumnType("text")
                         .HasColumnName("alergias");
@@ -69,6 +73,14 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     b.Property<string>("Autores")
                         .HasColumnType("text")
                         .HasColumnName("autores");
+
+                    b.Property<string>("CV")
+                        .HasColumnType("text")
+                        .HasColumnName("cv");
+
+                    b.Property<string>("Estado_general")
+                        .HasColumnType("text")
+                        .HasColumnName("estado_general");
 
                     b.Property<string>("Historia_familiar")
                         .HasColumnType("text")
@@ -90,13 +102,33 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("medicamentos");
 
+                    b.Property<string>("Nota_de_hospitalizacion")
+                        .HasColumnType("text")
+                        .HasColumnName("nota_de_hospitalizacion");
+
+                    b.Property<string>("Piel")
+                        .HasColumnType("text")
+                        .HasColumnName("piel");
+
+                    b.Property<string>("Signos_vitales")
+                        .HasColumnType("text")
+                        .HasColumnName("signos_vitales");
+
                     b.Property<string>("Sinopsis")
                         .HasColumnType("text")
                         .HasColumnName("sinopsis");
 
+                    b.Property<string>("Situacion")
+                        .HasColumnType("text")
+                        .HasColumnName("situacion");
+
                     b.Property<string>("Titulo")
                         .HasColumnType("text")
                         .HasColumnName("titulo");
+
+                    b.Property<string>("Torax")
+                        .HasColumnType("text")
+                        .HasColumnName("torax");
 
                     b.HasKey("Id");
 

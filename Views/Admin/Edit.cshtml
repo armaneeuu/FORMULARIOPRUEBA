@@ -51,7 +51,7 @@
                     </div>
                 }
             </div>
-
+            
             <div class="form-group">
                 <button type="button" class="btn btn-secondary" id="addEstadoButton">Agregar Estado</button>
             </div>
@@ -63,6 +63,75 @@
                 {
                     <p>Imagen actual: @Model.ImagenName</p>
                 }
+            </div>
+            <div class="form-group">
+                <label asp-for="Autores" class="control-label"></label>
+                <textarea asp-for="Autores" class="form-control"></textarea>
+                <span asp-validation-for="Autores" class="text-danger"></span>
+            </div>
+            <h4>Antecedentes del paciente</h4>
+            <h3>Historia clínica del paciente</h3>
+            <div class="form-group">
+                <label asp-for="Historial_medico" class="control-label"></label>
+                <textarea asp-for="Historial_medico" class="form-control"></textarea>
+                <span asp-validation-for="Historial_medico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Alergias" class="control-label"></label>
+                <textarea asp-for="Alergias" class="form-control"></textarea>
+                <span asp-validation-for="Alergias" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Medicamentos" class="control-label"></label>
+                <textarea asp-for="Medicamentos" class="form-control"></textarea>
+                <span asp-validation-for="Medicamentos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Historia_familiar" class="control-label"></label>
+                <textarea asp-for="Historia_familiar" class="form-control"></textarea>
+                <span asp-validation-for="Historia_familiar" class="text-danger"></span>
+            </div>
+            <h3>Nota del ingreso</h3>
+            <div class="form-group">
+                <label asp-for="Situacion" class="control-label"></label>
+                <textarea asp-for="Situacion" class="form-control"></textarea>
+                <span asp-validation-for="Situacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nota_de_hospitalizacion" class="control-label"></label>
+                <textarea asp-for="Nota_de_hospitalizacion" class="form-control"></textarea>
+                <span asp-validation-for="Nota_de_hospitalizacion" class="text-danger"></span>
+            </div>
+            <h3>Exámen físico</h3>
+            <div class="form-group">
+                <label asp-for="Signos_vitales" class="control-label"></label>
+                <textarea asp-for="Signos_vitales" class="form-control"></textarea>
+                <span asp-validation-for="Signos_vitales" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado_general" class="control-label"></label>
+                <textarea asp-for="Estado_general" class="form-control"></textarea>
+                <span asp-validation-for="Estado_general" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Piel" class="control-label"></label>
+                <textarea asp-for="Piel" class="form-control"></textarea>
+                <span asp-validation-for="Piel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Torax" class="control-label"></label>
+                <textarea asp-for="Torax" class="form-control"></textarea>
+                <span asp-validation-for="Torax" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CV" class="control-label"></label>
+                <textarea asp-for="CV" class="form-control"></textarea>
+                <span asp-validation-for="CV" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Abdomen" class="control-label"></label>
+                <textarea asp-for="Abdomen" class="form-control"></textarea>
+                <span asp-validation-for="Abdomen" class="text-danger"></span>
             </div>
 
             <div class="form-group">

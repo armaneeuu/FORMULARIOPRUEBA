@@ -293,8 +293,49 @@ public async Task<IActionResult> Edit(int id, Prueba prueba, List<IFormFile> upl
 
         <h1>Estados</h1>
         {estadosHtml}
-
+        <h1>Flujograma</h1>
         {imageSection}
+
+        <h2>Autores</h2>
+        <p>{formulario.Autores.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Historial médico</h2>
+        <p>{formulario.Historial_medico.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Alergias</h2>
+        <p>{formulario.Alergias.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Medicamentos</h2>
+        <p>{formulario.Medicamentos.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Historia familiar/social</h2>
+        <p>{formulario.Historia_familiar.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Nota de ingreso</h2>
+        <h2>Situación</h2>
+        <p>{formulario.Situacion.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Nota de hospitalización</h2>
+        <p>{formulario.Nota_de_hospitalizacion.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Exámen físico</h2>
+        <h2>Signos vitales</h2>
+        <p>{formulario.Signos_vitales.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Estado general</h2>
+        <p>{formulario.Estado_general.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Piel</h2>
+        <p>{formulario.Piel.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Tórax</h2>
+        <p>{formulario.Torax.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>CV</h2>
+        <p>{formulario.CV.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Abdomen</h2>
+        <p>{formulario.Abdomen.Replace(Environment.NewLine, "<br />")}</p>
     </section>
 </body>
 </html>";

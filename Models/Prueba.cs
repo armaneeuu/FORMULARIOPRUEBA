@@ -42,6 +42,30 @@ namespace FORMULARIOPRUEBA.Models
 
         [Column("historial_familiar")]
         public string? Historia_familiar { get; set; }
+
+        [Column("situacion")]
+        public string? Situacion { get; set; }
+
+        [Column("nota_de_hospitalizacion")]
+        public string? Nota_de_hospitalizacion { get; set; }
+
+        [Column("signos_vitales")]
+        public string? Signos_vitales { get; set; }
+
+        [Column("estado_general")]
+        public string? Estado_general { get; set; }
+
+        [Column("piel")]
+        public string? Piel { get; set; }
+
+        [Column("torax")]
+        public string? Torax { get; set; }
+
+        [Column("cv")]
+        public string? CV { get; set; }
+
+        [Column("abdomen")]
+        public string? Abdomen { get; set; }
         
     }
 }
