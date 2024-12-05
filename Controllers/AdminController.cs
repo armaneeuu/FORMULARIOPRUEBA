@@ -34,23 +34,33 @@ namespace FORMULARIOPRUEBA.Controllers
 
         // GET: Admin/Details/5
         public async Task<IActionResult> Details(int? id)
-{
-    if (id == null)
-    {
-        return NotFound();
-    }
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-    var formulario = await _context.DataPrueba
-        .Include(p => p.Estados) // Incluir los estados relacionados
-        .FirstOrDefaultAsync(m => m.Id == id);
-    if (formulario == null)
-    {
-        return NotFound();
-    }
+            var formulario = await _context.DataPrueba
+                .Include(p => p.Estados) // Incluir los estados relacionados
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (formulario == null)
+            {
+                return NotFound();
+            }
 
-    return View(formulario);
-}
+            return View(formulario);
+        }
+        public IActionResult GetImage(int id)
+        {
+            var prueba = _context.DataPrueba.FirstOrDefault(p => p.Id == id);
 
+            if (prueba == null || prueba.Imagen == null)
+            {
+                return NotFound();
+            }
+
+            return File(prueba.Imagen, "image/jpeg"); // Ajusta el tipo MIME según sea necesario
+        }
 
         // GET: Admin/Create
         public IActionResult Create()
@@ -61,10 +71,10 @@ namespace FORMULARIOPRUEBA.Controllers
         // POST: Admin/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        
+
         // GET: Admin/Edit/5
         // GET: Edit
-[HttpGet]
+        [HttpGet]
 public async Task<IActionResult> Edit(int? id)
 {
     if (id == null)
@@ -120,10 +130,18 @@ public async Task<IActionResult> Edit(int id, Prueba prueba, List<IFormFile> upl
             // Handle associated Estados
             if (prueba.Estados != null)
             {
-                // Remove existing estados that are not in the current list
-                var existingEstados = _context.DataEstados.Where(e => e.PruebaId == prueba.Id);
-                _context.DataEstados.RemoveRange(existingEstados.Where(e => 
-                    !prueba.Estados.Any(ne => ne.Id == e.Id)));
+                // Get existing estados for this Prueba
+                var existingEstados = await _context.DataEstados
+                    .Where(e => e.PruebaId == prueba.Id)
+                    .ToListAsync();
+
+                // Remove estados that are not in the current list
+                var estadosToRemove = existingEstados
+                    .Where(existing => !prueba.Estados.Any(current => 
+                        current.Id == existing.Id))
+                    .ToList();
+
+                _context.DataEstados.RemoveRange(estadosToRemove);
 
                 // Update or add new estados
                 foreach (var estado in prueba.Estados)
@@ -162,13 +180,12 @@ public async Task<IActionResult> Edit(int id, Prueba prueba, List<IFormFile> upl
 
     return View(prueba);
 }
+        private bool PruebaExists(int id)
+        {
+            return _context.DataPrueba.Any(e => e.Id == id);
+        }
 
-private bool PruebaExists(int id)
-{
-    return _context.DataPrueba.Any(e => e.Id == id);
-}
-
-public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -204,33 +221,33 @@ public async Task<IActionResult> Delete(int? id)
             return _context.DataPrueba.Any(e => e.Id == id);
         }
         public IActionResult ExportPdf(int id)
-{
-    var formulario = _context.DataPrueba
-        .Include(f => f.Estados) // Asegúrate de incluir los Estados
-        .FirstOrDefault(f => f.Id == id);
+        {
+            var formulario = _context.DataPrueba
+                .Include(f => f.Estados) // Asegúrate de incluir los Estados
+                .FirstOrDefault(f => f.Id == id);
 
-    if (formulario == null)
-    {
-        return NotFound();
-    }
+            if (formulario == null)
+            {
+                return NotFound();
+            }
 
-    var baseUrl = $"{Request.Scheme}://{Request.Host}";
-    var logoUrl = $"{baseUrl}/images/logo.jpeg";
+            var baseUrl = $"{Request.Scheme}://{Request.Host}";
+            var logoUrl = $"{baseUrl}/images/logo.jpeg";
 
-    // Crear contenido HTML para el PDF
-    var estadosHtml = new StringBuilder();
-    foreach (var estado in formulario.Estados)
-    {
-        estadosHtml.AppendLine($@"
+            // Crear contenido HTML para el PDF
+            var estadosHtml = new StringBuilder();
+            foreach (var estado in formulario.Estados)
+            {
+                estadosHtml.AppendLine($@"
             <h2>Estado {estado.Numero}: {estado.Nombre}</h2>
             <p>{estado.Descripcion}</p>");
-    }
-    string imageSection = formulario.Imagen != null 
-    ? $"<div class='image-container'><img src='data:image/png;base64,{Convert.ToBase64String(formulario.Imagen)}' alt='Imagen de {formulario.Titulo}' style='width: 300px; height: auto;' /></div>" 
-    : "";
+            }
+            string imageSection = formulario.Imagen != null
+            ? $"<div class='image-container'><img src='data:image/png;base64,{Convert.ToBase64String(formulario.Imagen)}' alt='Imagen de {formulario.Titulo}' style='width: 300px; height: auto;' /></div>"
+            : "";
 
 
-    var htmlContent = $@"
+            var htmlContent = $@"
 <!DOCTYPE html>
 <html lang='es'>
 <head>
@@ -282,16 +299,16 @@ public async Task<IActionResult> Delete(int? id)
 </body>
 </html>";
 
-    // Configuración del documento PDF
-    var pdfDocument = new HtmlToPdfDocument()
-    {
-        GlobalSettings = new GlobalSettings
-        {
-            PaperSize = PaperKind.A4,
-            Orientation = Orientation.Portrait,
-            Margins = new MarginSettings { Top = 10, Bottom = 10 }
-        },
-        Objects = {
+            // Configuración del documento PDF
+            var pdfDocument = new HtmlToPdfDocument()
+            {
+                GlobalSettings = new GlobalSettings
+                {
+                    PaperSize = PaperKind.A4,
+                    Orientation = Orientation.Portrait,
+                    Margins = new MarginSettings { Top = 10, Bottom = 10 }
+                },
+                Objects = {
             new ObjectSettings
             {
                 PagesCount = true,
@@ -300,13 +317,12 @@ public async Task<IActionResult> Delete(int? id)
                 FooterSettings = { Right = "Página [page] de [toPage]" }
             }
         }
-    };
+            };
 
-    // Convertir HTML a PDF y devolver el archivo
-    var pdf = _converter.Convert(pdfDocument);
-    return File(pdf, "application/pdf", "Formulario.pdf");
-}
+            // Convertir HTML a PDF y devolver el archivo
+            var pdf = _converter.Convert(pdfDocument);
+            return File(pdf, "application/pdf", "Formulario.pdf");
+        }
 
     }
 }
-   

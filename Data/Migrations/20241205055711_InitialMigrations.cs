@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FORMULARIOPRUEBA.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -60,7 +60,12 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     titulo = table.Column<string>(type: "text", nullable: true),
                     sinopsis = table.Column<string>(type: "text", nullable: true),
                     Imagen = table.Column<byte[]>(type: "bytea", nullable: true),
-                    imagename = table.Column<string>(type: "text", nullable: true)
+                    imagename = table.Column<string>(type: "text", nullable: true),
+                    autores = table.Column<string>(type: "text", nullable: true),
+                    historial_medico = table.Column<string>(type: "text", nullable: true),
+                    alergias = table.Column<string>(type: "text", nullable: true),
+                    medicamentos = table.Column<string>(type: "text", nullable: true),
+                    historial_familiar = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

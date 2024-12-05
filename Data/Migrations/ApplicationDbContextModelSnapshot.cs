@@ -59,6 +59,22 @@ namespace FORMULARIOPRUEBA.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Alergias")
+                        .HasColumnType("text")
+                        .HasColumnName("alergias");
+
+                    b.Property<string>("Autores")
+                        .HasColumnType("text")
+                        .HasColumnName("autores");
+
+                    b.Property<string>("Historia_familiar")
+                        .HasColumnType("text")
+                        .HasColumnName("historial_familiar");
+
+                    b.Property<string>("Historial_medico")
+                        .HasColumnType("text")
+                        .HasColumnName("historial_medico");
+
                     b.Property<byte[]>("Imagen")
                         .HasColumnType("bytea")
                         .HasColumnName("Imagen");
@@ -66,6 +82,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     b.Property<string>("ImagenName")
                         .HasColumnType("text")
                         .HasColumnName("imagename");
+
+                    b.Property<string>("Medicamentos")
+                        .HasColumnType("text")
+                        .HasColumnName("medicamentos");
 
                     b.Property<string>("Sinopsis")
                         .HasColumnType("text")

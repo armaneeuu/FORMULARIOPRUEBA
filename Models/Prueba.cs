@@ -27,6 +27,21 @@ namespace FORMULARIOPRUEBA.Models
         public Byte[]? Imagen { get; set; }
         [Column("imagename")]
         public String? ImagenName { get; set; }
+
+        [Column("autores")]
+        public string? Autores { get; set; }
+
+        [Column("historial_medico")]
+        public string? Historial_medico { get; set; }
+
+        [Column("alergias")]
+        public string? Alergias { get; set; }
+
+        [Column("medicamentos")]
+        public string? Medicamentos { get; set; }
+
+        [Column("historial_familiar")]
+        public string? Historia_familiar { get; set; }
         
     }
 }
