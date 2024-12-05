@@ -72,9 +72,32 @@ namespace FORMULARIOPRUEBA.Models
 
         [Column("Imagena")]
         public Byte[]? Imagena { get; set; }
+
         [Column("imagenamea")]
         public String? ImagenNamea { get; set; }
 
-        
+        [Column("orden_inicial")]
+        public string? Orden_inicial { get; set; }
+
+        [Column("distinguir")]
+        public string? Distinguir { get; set; }
+
+        [Column("indicar")]
+        public string? Indicar { get; set; }
+
+        [Column("analizar")]
+        public string? Analizar { get; set; }
+
+        [Column("evaluación")]
+        public string? Evaluación { get; set; }
+
+        [Column("aplicar")]
+        public string? Aplicar { get; set; }
+
+        [Column("medidas_esenciales")]
+        public string? Medidas_esenciales { get; set; }
+
+        [Column("baseline")]
+        public string? Baseline { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FORMULARIOPRUEBA.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241205072119_InitialMigrations")]
+    [Migration("20241205075703_InitialMigrations")]
     partial class InitialMigrations
     {
         /// <inheritdoc />
@@ -70,17 +70,37 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("alergias");
 
+                    b.Property<string>("Analizar")
+                        .HasColumnType("text")
+                        .HasColumnName("analizar");
+
+                    b.Property<string>("Aplicar")
+                        .HasColumnType("text")
+                        .HasColumnName("aplicar");
+
                     b.Property<string>("Autores")
                         .HasColumnType("text")
                         .HasColumnName("autores");
+
+                    b.Property<string>("Baseline")
+                        .HasColumnType("text")
+                        .HasColumnName("baseline");
 
                     b.Property<string>("CV")
                         .HasColumnType("text")
                         .HasColumnName("cv");
 
+                    b.Property<string>("Distinguir")
+                        .HasColumnType("text")
+                        .HasColumnName("distinguir");
+
                     b.Property<string>("Estado_general")
                         .HasColumnType("text")
                         .HasColumnName("estado_general");
+
+                    b.Property<string>("Evaluación")
+                        .HasColumnType("text")
+                        .HasColumnName("evaluación");
 
                     b.Property<string>("Historia_familiar")
                         .HasColumnType("text")
@@ -106,6 +126,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("bytea")
                         .HasColumnName("Imagena");
 
+                    b.Property<string>("Indicar")
+                        .HasColumnType("text")
+                        .HasColumnName("indicar");
+
                     b.Property<string>("Laboratorio")
                         .HasColumnType("text")
                         .HasColumnName("laboratorio");
@@ -114,9 +138,17 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("medicamentos");
 
+                    b.Property<string>("Medidas_esenciales")
+                        .HasColumnType("text")
+                        .HasColumnName("medidas_esenciales");
+
                     b.Property<string>("Nota_de_hospitalizacion")
                         .HasColumnType("text")
                         .HasColumnName("nota_de_hospitalizacion");
+
+                    b.Property<string>("Orden_inicial")
+                        .HasColumnType("text")
+                        .HasColumnName("orden_inicial");
 
                     b.Property<string>("Piel")
                         .HasColumnType("text")

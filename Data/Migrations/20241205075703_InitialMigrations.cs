@@ -76,7 +76,15 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     abdomen = table.Column<string>(type: "text", nullable: true),
                     laboratorio = table.Column<string>(type: "text", nullable: true),
                     Imagena = table.Column<byte[]>(type: "bytea", nullable: true),
-                    imagenamea = table.Column<string>(type: "text", nullable: true)
+                    imagenamea = table.Column<string>(type: "text", nullable: true),
+                    orden_inicial = table.Column<string>(type: "text", nullable: true),
+                    distinguir = table.Column<string>(type: "text", nullable: true),
+                    indicar = table.Column<string>(type: "text", nullable: true),
+                    analizar = table.Column<string>(type: "text", nullable: true),
+                    evaluación = table.Column<string>(type: "text", nullable: true),
+                    aplicar = table.Column<string>(type: "text", nullable: true),
+                    medidas_esenciales = table.Column<string>(type: "text", nullable: true),
+                    baseline = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
