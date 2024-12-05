@@ -61,6 +61,17 @@ namespace FORMULARIOPRUEBA.Controllers
 
             return File(prueba.Imagen, "image/jpeg"); // Ajusta el tipo MIME según sea necesario
         }
+        public IActionResult GetImagea(int id)
+        {
+            var prueba = _context.DataPrueba.FirstOrDefault(p => p.Id == id);
+
+            if (prueba == null || prueba.Imagena == null)
+            {
+                return NotFound();
+            }
+
+            return File(prueba.Imagena, "image/jpeg"); // Ajusta el tipo MIME según sea necesario
+        }
 
         // GET: Admin/Create
         public IActionResult Create()
@@ -245,6 +256,9 @@ public async Task<IActionResult> Edit(int id, Prueba prueba, List<IFormFile> upl
             string imageSection = formulario.Imagen != null
             ? $"<div class='image-container'><img src='data:image/png;base64,{Convert.ToBase64String(formulario.Imagen)}' alt='Imagen de {formulario.Titulo}' style='width: 300px; height: auto;' /></div>"
             : "";
+            string imageSectiona = formulario.Imagena != null
+            ? $"<div class='image-container'><img src='data:image/png;base64,{Convert.ToBase64String(formulario.Imagena)}' alt='Imagen de {formulario.Titulo}' style='width: 300px; height: auto;' /></div>"
+            : "";
 
 
             var htmlContent = $@"
@@ -336,6 +350,12 @@ public async Task<IActionResult> Edit(int id, Prueba prueba, List<IFormFile> upl
 
         <h2>Abdomen</h2>
         <p>{formulario.Abdomen.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Laboratorio</h2>
+        <p>{formulario.Laboratorio.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h1>Imágenes</h1>
+        {imageSectiona}
     </section>
 </body>
 </html>";

@@ -73,7 +73,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     piel = table.Column<string>(type: "text", nullable: true),
                     torax = table.Column<string>(type: "text", nullable: true),
                     cv = table.Column<string>(type: "text", nullable: true),
-                    abdomen = table.Column<string>(type: "text", nullable: true)
+                    abdomen = table.Column<string>(type: "text", nullable: true),
+                    laboratorio = table.Column<string>(type: "text", nullable: true),
+                    Imagena = table.Column<byte[]>(type: "bytea", nullable: true),
+                    imagenamea = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

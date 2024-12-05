@@ -133,6 +133,19 @@
                 <textarea asp-for="Abdomen" class="form-control"></textarea>
                 <span asp-validation-for="Abdomen" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Laboratorio" class="control-label"></label>
+                <textarea asp-for="Laboratorio" class="form-control"></textarea>
+                <span asp-validation-for="Laboratorio" class="text-danger"></span>
+            </div>
+            <div>
+                <label type="button" id="custom-button">Cargar Imagen</label>
+                <input type="file" id="uploada" name="uploada" />
+                @if (!string.IsNullOrEmpty(Model.ImagenNamea))
+                {
+                    <p>Imagen actual: @Model.ImagenNamea</p>
+                }
+            </div>
 
             <div class="form-group">
                 <input type="submit" value="Guardar Cambios" class="btn btn-primary" />

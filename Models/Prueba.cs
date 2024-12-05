@@ -66,6 +66,15 @@ namespace FORMULARIOPRUEBA.Models
 
         [Column("abdomen")]
         public string? Abdomen { get; set; }
+
+        [Column("laboratorio")]
+        public string? Laboratorio { get; set; }
+
+        [Column("Imagena")]
+        public Byte[]? Imagena { get; set; }
+        [Column("imagenamea")]
+        public String? ImagenNamea { get; set; }
+
         
     }
 }

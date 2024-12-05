@@ -119,6 +119,16 @@
                 <textarea asp-for="Abdomen" class="form-control"></textarea>
                 <span asp-validation-for="Abdomen" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Laboratorio" class="control-label"></label>
+                <textarea asp-for="Laboratorio" class="form-control"></textarea>
+                <span asp-validation-for="Laboratorio" class="text-danger"></span>
+            </div>
+            <h3>Exámen físico</h3>
+            <div>
+                <label type="button" id="custom-button">Cargar Imagen</label>
+                <input type="file" id="uploada" name="uploada" />
+            </div>
 
             <div class="form-group">
                 <input type="submit" value="Crear" class="btn btn-primary" />

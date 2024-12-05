@@ -87,6 +87,21 @@
 
         <dt class="col-12">Abdomen</dt>
         <dd class="col-12">@Model.Abdomen</dd>
+        
+        <dt class="col-12">Laboratorio</dt>
+        <dd class="col-12">@Model.Laboratorio</dd>
+
+        @if (!string.IsNullOrEmpty(Model.ImagenNamea))
+        {
+            <dt class="col-12">Imágenes</dt>
+            <dd class="col-12">
+
+                @if (Model.Imagena != null)
+                {
+                    <img src="@Url.Action("GetImagea", new { id = Model.Id })" alt="Imagena" class="img-fluid mt-2" />
+                }
+            </dd>
+        }
     </dl>
 
     

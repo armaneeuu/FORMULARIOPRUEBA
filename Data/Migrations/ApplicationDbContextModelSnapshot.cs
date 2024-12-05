@@ -95,6 +95,18 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("imagename");
 
+                    b.Property<string>("ImagenNamea")
+                        .HasColumnType("text")
+                        .HasColumnName("imagenamea");
+
+                    b.Property<byte[]>("Imagena")
+                        .HasColumnType("bytea")
+                        .HasColumnName("Imagena");
+
+                    b.Property<string>("Laboratorio")
+                        .HasColumnType("text")
+                        .HasColumnName("laboratorio");
+
                     b.Property<string>("Medicamentos")
                         .HasColumnType("text")
                         .HasColumnName("medicamentos");

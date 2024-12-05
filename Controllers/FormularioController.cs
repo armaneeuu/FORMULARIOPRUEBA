@@ -38,39 +38,52 @@ namespace FORMULARIOPRUEBA.Controllers
 
         [HttpPost]
 [ValidateAntiForgeryToken]
-public async Task<IActionResult> Create(Prueba prueba, List<IFormFile> upload)
+public async Task<IActionResult> Create(Prueba prueba, List<IFormFile> upload, List<IFormFile> uploada)
 {
     if (ModelState.IsValid)
     {
-        // Handle file upload
+        // Primera imagen
         if (upload != null && upload.Count > 0)
         {
-            foreach (var up in upload)
+            var up = upload.First();
+            using (var str = up.OpenReadStream())
             {
-                using (var str = up.OpenReadStream())
+                using (var br = new BinaryReader(str))
                 {
-                    using (var br = new BinaryReader(str))
-                    {
-                        prueba.Imagen = br.ReadBytes((Int32)str.Length);
-                        prueba.ImagenName = Path.GetFileName(up.FileName);
-                    }
+                    prueba.Imagen = br.ReadBytes((Int32)str.Length);
+                    prueba.ImagenName = Path.GetFileName(up.FileName);
                 }
             }
         }
 
-        // Add the main Prueba entity
+        // Segunda imagen
+        if (uploada != null && uploada.Count > 0)
+        {
+            var up = uploada.First();
+            using (var str = up.OpenReadStream())
+            {
+                using (var br = new BinaryReader(str))
+                {
+                    prueba.Imagena = br.ReadBytes((Int32)str.Length);
+                    prueba.ImagenNamea = Path.GetFileName(up.FileName);
+                }
+            }
+        }
+
+        // Depuración: Verificar valores antes de guardar
+        Console.WriteLine($"Imagen principal: {prueba.ImagenName}, Imagen secundaria: {prueba.ImagenNamea}");
+
+        // Agregar entidad principal
         _context.DataPrueba.Add(prueba);
         await _context.SaveChangesAsync();
 
-        // Handle associated Estados - Reset ID before adding
+        // Manejar Estados asociados
         if (prueba.Estados != null && prueba.Estados.Count > 0)
         {
             foreach (var estado in prueba.Estados)
             {
-                // Asociar correctamente el ID de la prueba
                 estado.PruebaId = prueba.Id;
 
-                // Solo agregar si es un nuevo estado
                 if (estado.Id == 0)
                 {
                     _context.DataEstados.Add(estado);

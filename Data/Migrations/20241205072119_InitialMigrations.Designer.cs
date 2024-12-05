@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FORMULARIOPRUEBA.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241205064205_InitialMigrations")]
+    [Migration("20241205072119_InitialMigrations")]
     partial class InitialMigrations
     {
         /// <inheritdoc />
@@ -97,6 +97,18 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     b.Property<string>("ImagenName")
                         .HasColumnType("text")
                         .HasColumnName("imagename");
+
+                    b.Property<string>("ImagenNamea")
+                        .HasColumnType("text")
+                        .HasColumnName("imagenamea");
+
+                    b.Property<byte[]>("Imagena")
+                        .HasColumnType("bytea")
+                        .HasColumnName("Imagena");
+
+                    b.Property<string>("Laboratorio")
+                        .HasColumnType("text")
+                        .HasColumnName("laboratorio");
 
                     b.Property<string>("Medicamentos")
                         .HasColumnType("text")
