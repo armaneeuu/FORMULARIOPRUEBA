@@ -20,8 +20,8 @@ namespace FORMULARIOPRUEBA.Models
         [Column("sinopsis")]
         public string? Sinopsis { get; set; }
 
-        
-        public List<Estados>? Estados { get; set; } 
+
+        public List<Estados>? Estados { get; set; }
 
         public List<Estadosa>? Estadosa { get; set; }
 
@@ -109,5 +109,15 @@ namespace FORMULARIOPRUEBA.Models
         public string? Equipos_de_suministro { get; set; }
 
         public List<Dialogo>? Dialogo { get; set; }
+
+        [Column("confederado")]
+        public string? Confederado { get; set; }
+
+        [Column("archivo")]
+        public Byte[]? Archivo { get; set; }
+
+        [Column("archivo_name")]
+        public String? ArchivoName { get; set; }
+        
     }
 }

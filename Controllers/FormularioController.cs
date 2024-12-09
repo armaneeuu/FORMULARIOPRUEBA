@@ -38,7 +38,7 @@ namespace FORMULARIOPRUEBA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Prueba prueba, List<IFormFile> upload, List<IFormFile> uploada)
+        public async Task<IActionResult> Create(Prueba prueba, List<IFormFile> upload, List<IFormFile> uploada, List<IFormFile> uploadArchivo)
         {
             if (ModelState.IsValid)
             {
@@ -70,8 +70,25 @@ namespace FORMULARIOPRUEBA.Controllers
                     }
                 }
 
+                if (uploadArchivo != null && uploadArchivo.Count > 0)
+                {
+                    var up = uploadArchivo.First();
+                    if (up.Length > 0 && (Path.GetExtension(up.FileName).ToLower() == ".pdf" || Path.GetExtension(up.FileName).ToLower() == ".docx"))
+                    {
+                        using (var str = up.OpenReadStream())
+                        {
+                            using (var br = new BinaryReader(str))
+                            {
+                                prueba.Archivo = br.ReadBytes((Int32)str.Length);
+                                prueba.ArchivoName = Path.GetFileName(up.FileName);
+                            }
+                        }
+                    }
+                }
+
+
                 // Depuración: Verificar valores antes de guardar
-                Console.WriteLine($"Imagen principal: {prueba.ImagenName}, Imagen secundaria: {prueba.ImagenNamea}");
+                Console.WriteLine($"Imagen principal: {prueba.ImagenName}, Imagen secundaria: {prueba.ImagenNamea}, Archivo: {prueba.ArchivoName}");
 
                 // Agregar entidad principal
                 _context.DataPrueba.Add(prueba);

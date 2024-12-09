@@ -27,7 +27,7 @@
         <dd class="col-12">@Model.Titulo</dd>
 
         <h4>Resumen del caso</h4>
-        using iText.Layout.Element;
+
         <hr />
 
         <dt class="col-12">Sinopsis</dt>
@@ -155,9 +155,13 @@
         <dd class="col-12">@estadoa.Descripcion<br /></dd>
 
     }
+    <dt class="col-12">Preguntas de preparación</dt>
+    <dd class="col-12">@Model.Preguntas_de_preparacion</dd>
 
+    <dt class="col-12">Equipos de suministro</del></dt>
+    <dd class="col-12">@Model.Equipos_de_suministro</dd>
 
-    <h3>Dialogo</h3>
+    <h3>Guión</h3>
     <table>
         <tr>
             <td style="background-color: yellow;">Personaje</td>
@@ -173,6 +177,29 @@
 
         }
     </table>
+
+    @if (!string.IsNullOrEmpty(Model.ArchivoName))
+{
+    <dt class="col-12">Archivo Subido</dt>
+    <dd class="col-12">
+        @if (Model.ArchivoName.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
+        {
+            <iframe src="@Url.Action("GetArchivo", new { id = Model.Id })" width="100%" height="600px" frameborder="0"></iframe>
+        }
+        else if (Model.ArchivoName.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
+                 Model.ArchivoName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                 Model.ArchivoName.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase))
+        {
+            <img src="@Url.Action("GetArchivo", new { id = Model.Id })" alt="Archivo Imagen" style="max-width: 100%;" />
+        }
+        else
+        {
+            <p>No se puede visualizar este tipo de archivo. <a href="@Url.Action("GetArchivo", new { id = Model.Id })" target="_blank">Descargar</a></p>
+        }
+    </dd>
+}
+
+
 
 </div>
 

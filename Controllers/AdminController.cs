@@ -41,7 +41,7 @@ namespace FORMULARIOPRUEBA.Controllers
             }
 
             var formulario = await _context.DataPrueba
-                .Include(p => p.Estados) 
+                .Include(p => p.Estados)
                 .Include(p => p.Estadosa)
                 .Include(p => p.Dialogo)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -75,6 +75,41 @@ namespace FORMULARIOPRUEBA.Controllers
             return File(prueba.Imagena, "image/jpeg"); // Ajusta el tipo MIME según sea necesario
         }
 
+        [HttpGet]
+public IActionResult GetArchivo(int id)
+{
+    var prueba = _context.DataPrueba.Find(id);
+    if (prueba == null || prueba.Archivo == null)
+    {
+        return NotFound();
+    }
+
+    string contentType;
+    var extension = Path.GetExtension(prueba.ArchivoName).ToLower();
+
+    switch (extension)
+    {
+        case ".pdf":
+            contentType = "application/pdf";
+            break;
+        case ".png":
+        case ".jpg":
+        case ".jpeg":
+            contentType = $"image/{extension.Replace(".", "")}";
+            break;
+        case ".txt":
+            contentType = "text/plain";
+            break;
+        default:
+            contentType = "application/octet-stream"; // Otros archivos
+            break;
+    }
+
+    return File(prueba.Archivo, contentType);
+}
+
+
+
         // GET: Admin/Create
         public IActionResult Create()
         {
@@ -100,7 +135,7 @@ namespace FORMULARIOPRUEBA.Controllers
                 .Include(p => p.Estadosa)
                 .Include(p => p.Dialogo)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            
+
 
             if (prueba == null)
             {
@@ -321,8 +356,9 @@ namespace FORMULARIOPRUEBA.Controllers
         public IActionResult ExportPdf(int id)
         {
             var formulario = _context.DataPrueba
-                .Include(f => f.Estados) 
-                .Include(f => f.Estadosa) 
+                .Include(f => f.Estados)
+                .Include(f => f.Estadosa)
+                .Include(f => f.Dialogo)
                 .FirstOrDefault(f => f.Id == id);
 
             if (formulario == null)
@@ -349,6 +385,25 @@ namespace FORMULARIOPRUEBA.Controllers
             <h2>Estado {estadoa.Numero}: {estadoa.Nombre}</h2>
             <p>{estadoa.Descripcion}</p>");
             }
+
+            var dialogoHtml = new StringBuilder();
+            dialogoHtml.AppendLine(@"
+
+<table>
+    <tr>
+        <td style='background-color: yellow;'>Personaje</td>
+        <td style='background-color: yellow;'>Guión</td>  
+    </tr>");
+
+            foreach (var dialogo in formulario.Dialogo)
+            {
+                dialogoHtml.AppendLine($@"
+    <tr>
+        <td>{dialogo.Personaje}</td>
+        <td>{dialogo.Guion}</td>
+    </tr>");
+            }
+            dialogoHtml.AppendLine("</table>");
 
             string imageSection = formulario.Imagen != null
             ? $"<div class='image-container'><img src='data:image/png;base64,{Convert.ToBase64String(formulario.Imagen)}' alt='Imagen de {formulario.Titulo}' style='width: 300px; height: auto;' /></div>"
@@ -483,6 +538,15 @@ namespace FORMULARIOPRUEBA.Controllers
 
         <h1>Estados</h1>
         {estadosaHtml}
+
+        <h2>Preguntas de preparación</h2>
+        <p>{formulario.Preguntas_de_preparacion.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Equipos de suministro</h2>
+        <p>{formulario.Equipos_de_suministro.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h1>Guión</h1>
+        {dialogoHtml}
 
     </section>
 </body>
