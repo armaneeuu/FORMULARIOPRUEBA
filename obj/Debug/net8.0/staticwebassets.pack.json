@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\LENOVO\\Desktop\\FORMULARIOPRUEBA\\FORMULARIOPRUEBA\\wwwroot\\images\\logo.jpeg",
+      "PackagePath": "staticwebassets\\images\\logo.jpeg"
+    },
+    {
       "Id": "C:\\Users\\LENOVO\\Desktop\\FORMULARIOPRUEBA\\FORMULARIOPRUEBA\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

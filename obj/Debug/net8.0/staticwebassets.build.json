@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "B3Edl4KxsqP801SsTAqT96jQTDc4JT7U0XbnW1Ns0FA=",
+  "Hash": "7Lx8GKn/OMh47IDOkEGSnnx8aL7vSDycxUFf8MJynb8=",
   "Source": "FORMULARIOPRUEBA",
   "BasePath": "_content/FORMULARIOPRUEBA",
   "Mode": "Default",
@@ -1231,6 +1231,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\LENOVO\\Desktop\\FORMULARIOPRUEBA\\FORMULARIOPRUEBA\\wwwroot\\images\\logo.jpeg",
+      "SourceId": "FORMULARIOPRUEBA",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\LENOVO\\Desktop\\FORMULARIOPRUEBA\\FORMULARIOPRUEBA\\wwwroot\\",
+      "BasePath": "_content/FORMULARIOPRUEBA",
+      "RelativePath": "images/logo.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\logo.jpeg"
     },
     {
       "Identity": "C:\\Users\\LENOVO\\Desktop\\FORMULARIOPRUEBA\\FORMULARIOPRUEBA\\wwwroot\\js\\site.js",
