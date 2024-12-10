@@ -13,6 +13,10 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas.Parser;
+using iText.Kernel.Pdf.Canvas.Parser.Listener;
+
 
 namespace FORMULARIOPRUEBA.Controllers
 {
@@ -73,14 +77,17 @@ namespace FORMULARIOPRUEBA.Controllers
                 if (uploadArchivo != null && uploadArchivo.Count > 0)
                 {
                     var up = uploadArchivo.First();
-                    if (up.Length > 0 && (Path.GetExtension(up.FileName).ToLower() == ".pdf" || Path.GetExtension(up.FileName).ToLower() == ".docx"))
+                    using (var str = up.OpenReadStream())
                     {
-                        using (var str = up.OpenReadStream())
+                        using (var br = new BinaryReader(str))
                         {
-                            using (var br = new BinaryReader(str))
+                            prueba.Archivo = br.ReadBytes((Int32)str.Length);
+                            prueba.ArchivoName = Path.GetFileName(up.FileName);
+
+                            // Extraer texto del PDF
+                            if (Path.GetExtension(up.FileName).ToLower() == ".pdf")
                             {
-                                prueba.Archivo = br.ReadBytes((Int32)str.Length);
-                                prueba.ArchivoName = Path.GetFileName(up.FileName);
+                                prueba.ArchivoTextoExtraido = ExtractTextFromPdf(prueba.Archivo);
                             }
                         }
                     }
@@ -143,7 +150,30 @@ namespace FORMULARIOPRUEBA.Controllers
 
             return View(prueba);
         }
+        private string ExtractTextFromPdf(byte[] pdfBytes)
+        {
+            using (var memoryStream = new MemoryStream(pdfBytes))
+            {
+                using (var pdfReader = new PdfReader(memoryStream))
+                {
+                    using (var pdfDocument = new PdfDocument(pdfReader))
+                    {
+                        var textBuilder = new StringBuilder();
 
+                        for (int i = 1; i <= pdfDocument.GetNumberOfPages(); i++)
+                        {
+                            var page = pdfDocument.GetPage(i);
+                            var strategy = new LocationTextExtractionStrategy();
+
+                            PdfTextExtractor.GetTextFromPage(page, strategy);
+                            textBuilder.Append(strategy.GetResultantText());
+                        }
+
+                        return textBuilder.ToString();
+                    }
+                }
+            }
+        }
         // Existing method to display the image
 
 

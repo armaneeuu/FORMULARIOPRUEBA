@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FORMULARIOPRUEBA.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241205161158_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20241209012312_InitialMigrations")]
+    partial class InitialMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -130,6 +130,17 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("aplicar");
 
+                    b.Property<byte[]>("Archivo")
+                        .HasColumnType("bytea")
+                        .HasColumnName("archivo");
+
+                    b.Property<string>("ArchivoName")
+                        .HasColumnType("text")
+                        .HasColumnName("archivo_name");
+
+                    b.Property<string>("ArchivoTextoExtraido")
+                        .HasColumnType("text");
+
                     b.Property<string>("Autores")
                         .HasColumnType("text")
                         .HasColumnName("autores");
@@ -141,6 +152,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     b.Property<string>("CV")
                         .HasColumnType("text")
                         .HasColumnName("cv");
+
+                    b.Property<string>("Confederado")
+                        .HasColumnType("text")
+                        .HasColumnName("confederado");
 
                     b.Property<string>("Distinguir")
                         .HasColumnType("text")

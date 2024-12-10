@@ -261,6 +261,12 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="ArchivoTextoExtraido" class="control-label"></label>
+                <textarea asp-for="ArchivoTextoExtraido" class="form-control"></textarea>
+                <span asp-validation-for="ArchivoTextoExtraido" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <input type="submit" value="Guardar Cambios" class="btn btn-primary" />
             </div>
         </form>

@@ -135,6 +135,9 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("archivo_name");
 
+                    b.Property<string>("ArchivoTextoExtraido")
+                        .HasColumnType("text");
+
                     b.Property<string>("Autores")
                         .HasColumnType("text")
                         .HasColumnName("autores");

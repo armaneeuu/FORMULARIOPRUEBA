@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FORMULARIOPRUEBA.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -86,7 +86,11 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     medidas_esenciales = table.Column<string>(type: "text", nullable: true),
                     baseline = table.Column<string>(type: "text", nullable: true),
                     preguntas_de_preparacion = table.Column<string>(type: "text", nullable: true),
-                    equipos_de_suministro = table.Column<string>(type: "text", nullable: true)
+                    equipos_de_suministro = table.Column<string>(type: "text", nullable: true),
+                    confederado = table.Column<string>(type: "text", nullable: true),
+                    archivo = table.Column<byte[]>(type: "bytea", nullable: true),
+                    archivo_name = table.Column<string>(type: "text", nullable: true),
+                    ArchivoTextoExtraido = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

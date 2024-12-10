@@ -76,37 +76,37 @@ namespace FORMULARIOPRUEBA.Controllers
         }
 
         [HttpGet]
-public IActionResult GetArchivo(int id)
-{
-    var prueba = _context.DataPrueba.Find(id);
-    if (prueba == null || prueba.Archivo == null)
-    {
-        return NotFound();
-    }
+        public IActionResult GetArchivo(int id)
+        {
+            var prueba = _context.DataPrueba.Find(id);
+            if (prueba == null || prueba.Archivo == null)
+            {
+                return NotFound();
+            }
 
-    string contentType;
-    var extension = Path.GetExtension(prueba.ArchivoName).ToLower();
+            string contentType;
+            var extension = Path.GetExtension(prueba.ArchivoName).ToLower();
 
-    switch (extension)
-    {
-        case ".pdf":
-            contentType = "application/pdf";
-            break;
-        case ".png":
-        case ".jpg":
-        case ".jpeg":
-            contentType = $"image/{extension.Replace(".", "")}";
-            break;
-        case ".txt":
-            contentType = "text/plain";
-            break;
-        default:
-            contentType = "application/octet-stream"; // Otros archivos
-            break;
-    }
+            switch (extension)
+            {
+                case ".pdf":
+                    contentType = "application/pdf";
+                    break;
+                case ".png":
+                case ".jpg":
+                case ".jpeg":
+                    contentType = $"image/{extension.Replace(".", "")}";
+                    break;
+                case ".txt":
+                    contentType = "text/plain";
+                    break;
+                default:
+                    contentType = "application/octet-stream"; // Otros archivos
+                    break;
+            }
 
-    return File(prueba.Archivo, contentType);
-}
+            return File(prueba.Archivo, contentType);
+        }
 
 
 
@@ -411,6 +411,14 @@ public IActionResult GetArchivo(int id)
             string imageSectiona = formulario.Imagena != null
             ? $"<div class='image-container'><img src='data:image/png;base64,{Convert.ToBase64String(formulario.Imagena)}' alt='Imagen de {formulario.Titulo}' style='width: 300px; height: auto;' /></div>"
             : "";
+            string ArchivoSection = formulario.ArchivoTextoExtraido != null
+    ? $"<pre style='font-family: monospace; white-space: pre-wrap;'>{formulario.ArchivoTextoExtraido}</pre>"
+    : formulario.Archivo != null
+        ? Path.GetExtension(formulario.ArchivoName).ToLower() == ".pdf"
+            ? $"<iframe src='data:application/pdf;base64,{Convert.ToBase64String(formulario.Archivo)}' style='width: 100%; height: 500px;' frameborder='0'></iframe>"
+            : $"<a href='data:application/octet-stream;base64,{Convert.ToBase64String(formulario.Archivo)}' download='{formulario.ArchivoName}'>Descargar {formulario.ArchivoName}</a>"
+        : "<p>No hay archivo asociado.</p>";
+
 
 
             var htmlContent = $@"
@@ -547,6 +555,9 @@ public IActionResult GetArchivo(int id)
 
         <h1>Guión</h1>
         {dialogoHtml}
+
+        <h1>Texto extraido</h1>
+        {ArchivoSection}
 
     </section>
 </body>

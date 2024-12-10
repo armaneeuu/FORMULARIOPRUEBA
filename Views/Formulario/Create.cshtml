@@ -230,6 +230,10 @@
                 <label type="button" id="custom-button-archivo">Cargar Archivo Adicional</label>
                 <input type="file" id="uploadArchivo" name="uploadArchivo" />
             </div>
+            <div class="form-group">
+                <label>Texto extraído del PDF:</label>
+                <textarea asp-for="ArchivoTextoExtraido" class="form-control" readonly></textarea>
+            </div>
 
             <div class="form-group">
                 <input type="submit" value="Crear" class="btn btn-primary" />
@@ -253,15 +257,15 @@
             let newEstadoInput = document.createElement("div");
             newEstadoInput.classList.add("form-group");
             newEstadoInput.innerHTML = `
-                        <label for="Estados_${estadoCount}_Numero">Número del Estado</label>
-                        <input type="number" name="Estados[${estadoCount}].Numero" class="form-control" placeholder="Ingrese el número del estado" />
+                            <label for="Estados_${estadoCount}_Numero">Número del Estado</label>
+                            <input type="number" name="Estados[${estadoCount}].Numero" class="form-control" placeholder="Ingrese el número del estado" />
 
-                        <label for="Estados_${estadoCount}_Nombre">Estado ${estadoCount + 1}: Nombre del Estado</label>
-                        <input type="text" name="Estados[${estadoCount}].Nombre" class="form-control" placeholder="Ingrese el nombre del estado" />
+                            <label for="Estados_${estadoCount}_Nombre">Estado ${estadoCount + 1}: Nombre del Estado</label>
+                            <input type="text" name="Estados[${estadoCount}].Nombre" class="form-control" placeholder="Ingrese el nombre del estado" />
 
-                        <label for="Estados_${estadoCount}_Descripcion">Descripción del Estado</label>
-                        <input type="text" name="Estados[${estadoCount}].Descripcion" class="form-control" placeholder="Ingrese la descripción del estado" />
-                    `;
+                            <label for="Estados_${estadoCount}_Descripcion">Descripción del Estado</label>
+                            <input type="text" name="Estados[${estadoCount}].Descripcion" class="form-control" placeholder="Ingrese la descripción del estado" />
+                        `;
             document.getElementById("estadosContainer").appendChild(newEstadoInput);
             estadoCount++;
         };
@@ -272,15 +276,15 @@
             let newEstadoaInput = document.createElement("div");
             newEstadoaInput.classList.add("form-group");
             newEstadoaInput.innerHTML = `
-                        <label for="Estadosa_${estadoaCount}_Numero">Número del Estado</label>
-                        <input type="number" name="Estadosa[${estadoaCount}].Numero" class="form-control" placeholder="Ingrese el número del estado" />
+                            <label for="Estadosa_${estadoaCount}_Numero">Número del Estado</label>
+                            <input type="number" name="Estadosa[${estadoaCount}].Numero" class="form-control" placeholder="Ingrese el número del estado" />
 
-                        <label for="Estadosa_${estadoaCount}_Nombre">Estado ${estadoaCount + 1}: Nombre del Estado</label>
-                        <input type="text" name="Estadosa[${estadoaCount}].Nombre" class="form-control" placeholder="Ingrese el nombre del estado" />
+                            <label for="Estadosa_${estadoaCount}_Nombre">Estado ${estadoaCount + 1}: Nombre del Estado</label>
+                            <input type="text" name="Estadosa[${estadoaCount}].Nombre" class="form-control" placeholder="Ingrese el nombre del estado" />
 
-                        <label for="Estadosa_${estadoaCount}_Descripcion">Descripción del Estado</label>
-                        <input type="text" name="Estadosa[${estadoaCount}].Descripcion" class="form-control" placeholder="Ingrese la descripción del estado" />
-                    `;
+                            <label for="Estadosa_${estadoaCount}_Descripcion">Descripción del Estado</label>
+                            <input type="text" name="Estadosa[${estadoaCount}].Descripcion" class="form-control" placeholder="Ingrese la descripción del estado" />
+                        `;
             document.getElementById("estadosaContainer").appendChild(newEstadoaInput);
             estadoaCount++;
         };
@@ -291,13 +295,13 @@
             let newDialogoInput = document.createElement("div");
             newDialogoInput.classList.add("form-group");
             newDialogoInput.innerHTML = `
-                        <label for="Dialogo_${dialogoCount}_Personaje">Personaje</label>
-                        <input type="text" name="Dialogo[${dialogoCount}].Personaje" class="form-control" placeholder="Ingrese el nombre del personaje" />
+                            <label for="Dialogo_${dialogoCount}_Personaje">Personaje</label>
+                            <input type="text" name="Dialogo[${dialogoCount}].Personaje" class="form-control" placeholder="Ingrese el nombre del personaje" />
 
-                        <label for="Dialogo_${dialogoCount}_Guion">Guion</label>
-                        <input type="text" name="Dialogo[${dialogoCount}].Guion" class="form-control" placeholder="Ingrese el guión del personaje" />
+                            <label for="Dialogo_${dialogoCount}_Guion">Guion</label>
+                            <input type="text" name="Dialogo[${dialogoCount}].Guion" class="form-control" placeholder="Ingrese el guión del personaje" />
 
-                    `;
+                        `;
             document.getElementById("dialogoContainer").appendChild(newDialogoInput);
             dialogoCount++;
         };
@@ -308,12 +312,12 @@
             let newArchivoInput = document.createElement("div");
             newArchivoInput.classList.add("form-group");
             newArchivoInput.innerHTML = `
-            <label for="ArchivosAdicionales_${archivoCount}_Nombre">Nombre del Archivo</label>
-            <input type="text" name="ArchivosAdicionales[${archivoCount}].Nombre" class="form-control" placeholder="Ingrese un nombre para el archivo" />
+                <label for="ArchivosAdicionales_${archivoCount}_Nombre">Nombre del Archivo</label>
+                <input type="text" name="ArchivosAdicionales[${archivoCount}].Nombre" class="form-control" placeholder="Ingrese un nombre para el archivo" />
 
-            <label for="ArchivosAdicionales_${archivoCount}_Archivo">Archivo</label>
-            <input type="file" name="ArchivosAdicionales[${archivoCount}].Archivo" class="form-control-file" />
-        `;
+                <label for="ArchivosAdicionales_${archivoCount}_Archivo">Archivo</label>
+                <input type="file" name="ArchivosAdicionales[${archivoCount}].Archivo" class="form-control-file" />
+            `;
             document.getElementById("archivosContainer").appendChild(newArchivoInput);
             archivoCount++;
         };

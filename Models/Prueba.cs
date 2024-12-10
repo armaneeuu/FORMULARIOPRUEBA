@@ -118,6 +118,7 @@ namespace FORMULARIOPRUEBA.Models
 
         [Column("archivo_name")]
         public String? ArchivoName { get; set; }
-        
+
+        public string? ArchivoTextoExtraido { get; set; }
     }
 }
