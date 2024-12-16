@@ -90,7 +90,9 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     confederado = table.Column<string>(type: "text", nullable: true),
                     archivo = table.Column<byte[]>(type: "bytea", nullable: true),
                     archivo_name = table.Column<string>(type: "text", nullable: true),
-                    ArchivoTextoExtraido = table.Column<string>(type: "text", nullable: true)
+                    ArchivoTextoExtraido = table.Column<string>(type: "text", nullable: true),
+                    Imagenc = table.Column<byte[]>(type: "bytea", nullable: true),
+                    imagenamec = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -268,6 +270,28 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "t_status",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    descripcion = table.Column<string>(type: "text", nullable: true),
+                    Numero = table.Column<int>(type: "integer", nullable: false),
+                    Nombre = table.Column<string>(type: "text", nullable: true),
+                    PruebaId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_t_status", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_t_status_t_prueba_PruebaId",
+                        column: x => x.PruebaId,
+                        principalTable: "t_prueba",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -319,6 +343,11 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                 name: "IX_t_estadosa_PruebaId",
                 table: "t_estadosa",
                 column: "PruebaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_t_status_PruebaId",
+                table: "t_status",
+                column: "PruebaId");
         }
 
         /// <inheritdoc />
@@ -347,6 +376,9 @@ namespace FORMULARIOPRUEBA.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "t_estadosa");
+
+            migrationBuilder.DropTable(
+                name: "t_status");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

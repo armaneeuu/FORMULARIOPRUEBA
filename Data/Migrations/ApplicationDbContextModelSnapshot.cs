@@ -190,9 +190,17 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("imagenamea");
 
+                    b.Property<string>("ImagenNamec")
+                        .HasColumnType("text")
+                        .HasColumnName("imagenamec");
+
                     b.Property<byte[]>("Imagena")
                         .HasColumnType("bytea")
                         .HasColumnName("Imagena");
+
+                    b.Property<byte[]>("Imagenc")
+                        .HasColumnType("bytea")
+                        .HasColumnName("Imagenc");
 
                     b.Property<string>("Indicar")
                         .HasColumnType("text")
@@ -249,6 +257,34 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("t_prueba");
+                });
+
+            modelBuilder.Entity("FORMULARIOPRUEBA.Models.Status", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("text")
+                        .HasColumnName("descripcion");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Numero")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PruebaId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PruebaId");
+
+                    b.ToTable("t_status");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -484,6 +520,17 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     b.Navigation("Prueba");
                 });
 
+            modelBuilder.Entity("FORMULARIOPRUEBA.Models.Status", b =>
+                {
+                    b.HasOne("FORMULARIOPRUEBA.Models.Prueba", "Prueba")
+                        .WithMany("Status")
+                        .HasForeignKey("PruebaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prueba");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -542,6 +589,8 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     b.Navigation("Estados");
 
                     b.Navigation("Estadosa");
+
+                    b.Navigation("Status");
                 });
 #pragma warning restore 612, 618
         }

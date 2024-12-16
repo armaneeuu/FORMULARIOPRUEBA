@@ -201,10 +201,34 @@
         </dd>
     }
 
-    <dt class="col-12">Texto extraído</del></dt>
-    <dd class="col-12">
-        @Html.Raw(Model.ArchivoTextoExtraido.Replace(Environment.NewLine, "<br />"))
-    </dd>
+   <dt class="col-12">Texto extraído</dt>
+<dd class="col-12">
+    @Html.Raw(Model.ArchivoTextoExtraido.Replace("\r\n", "<br />").Replace("\n", "<br />"))
+</dd>
+
+
+    <dt class="col-12">Estados</dt>
+
+        @foreach (var statu in Model.Status)
+        {
+
+            <dt class="col-12">Estado @statu.Numero : @statu.Nombre</dt>
+
+            <dd class="col-12">@statu.Descripcion<br /></dd>
+
+        }
+
+         @if (!string.IsNullOrEmpty(Model.ImagenNamec))
+        {
+            <dt class="col-12">Imágenes</dt>
+            <dd class="col-12">
+
+                @if (Model.Imagenc != null)
+                {
+                    <img src="@Url.Action("GetImagec", new { id = Model.Id })" alt="Imagenc" class="img-fluid mt-2" />
+                }
+            </dd>
+        }
 
 </div>
 

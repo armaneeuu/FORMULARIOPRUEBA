@@ -42,7 +42,7 @@ namespace FORMULARIOPRUEBA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Prueba prueba, List<IFormFile> upload, List<IFormFile> uploada, List<IFormFile> uploadArchivo)
+        public async Task<IActionResult> Create(Prueba prueba, List<IFormFile> upload, List<IFormFile> uploada, List<IFormFile> uploadArchivo, List<IFormFile> uploadc)
         {
             if (ModelState.IsValid)
             {
@@ -93,9 +93,22 @@ namespace FORMULARIOPRUEBA.Controllers
                     }
                 }
 
+                if (uploadc != null && uploadc.Count > 0)
+                {
+                    var up = uploadc.First();
+                    using (var str = up.OpenReadStream())
+                    {
+                        using (var br = new BinaryReader(str))
+                        {
+                            prueba.Imagenc = br.ReadBytes((Int32)str.Length);
+                            prueba.ImagenNamec = Path.GetFileName(up.FileName);
+                        }
+                    }
+                }
+
 
                 // Depuración: Verificar valores antes de guardar
-                Console.WriteLine($"Imagen principal: {prueba.ImagenName}, Imagen secundaria: {prueba.ImagenNamea}, Archivo: {prueba.ArchivoName}");
+                Console.WriteLine($"Imagen principal: {prueba.ImagenName}, Imagen secundaria: {prueba.ImagenNamea}, Archivo: {prueba.ArchivoName}, Imagen terciaria: {prueba.ImagenNamec}");
 
                 // Agregar entidad principal
                 _context.DataPrueba.Add(prueba);
@@ -139,6 +152,20 @@ namespace FORMULARIOPRUEBA.Controllers
                         if (dialogo.Id == 0)
                         {
                             _context.DataDialogo.Add(dialogo);
+                        }
+                    }
+
+                    await _context.SaveChangesAsync();
+                }
+                if (prueba.Status != null && prueba.Status.Count > 0)
+                {
+                    foreach (var statu in prueba.Status)
+                    {
+                        statu.PruebaId = prueba.Id;
+
+                        if (statu.Id == 0)
+                        {
+                            _context.DataStatus.Add(statu);
                         }
                     }
 

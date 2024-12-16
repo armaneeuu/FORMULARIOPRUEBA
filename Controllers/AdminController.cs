@@ -44,6 +44,7 @@ namespace FORMULARIOPRUEBA.Controllers
                 .Include(p => p.Estados)
                 .Include(p => p.Estadosa)
                 .Include(p => p.Dialogo)
+                .Include(p => p.Status)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (formulario == null)
             {
@@ -73,6 +74,17 @@ namespace FORMULARIOPRUEBA.Controllers
             }
 
             return File(prueba.Imagena, "image/jpeg"); // Ajusta el tipo MIME según sea necesario
+        }
+        public IActionResult GetImagec(int id)
+        {
+            var prueba = _context.DataPrueba.FirstOrDefault(p => p.Id == id);
+
+            if (prueba == null || prueba.Imagenc == null)
+            {
+                return NotFound();
+            }
+
+            return File(prueba.Imagenc, "image/jpeg"); // Ajusta el tipo MIME según sea necesario
         }
 
         [HttpGet]
@@ -134,6 +146,7 @@ namespace FORMULARIOPRUEBA.Controllers
                 .Include(p => p.Estados)
                 .Include(p => p.Estadosa)
                 .Include(p => p.Dialogo)
+                .Include(p => p.Status)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
 

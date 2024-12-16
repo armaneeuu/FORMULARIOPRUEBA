@@ -120,5 +120,13 @@ namespace FORMULARIOPRUEBA.Models
         public String? ArchivoName { get; set; }
 
         public string? ArchivoTextoExtraido { get; set; }
+
+        public List<Status>? Status { get; set; }
+
+        [Column("Imagenc")]
+        public Byte[]? Imagenc { get; set; }
+
+        [Column("imagenamec")]
+        public String? ImagenNamec { get; set; }
     }
 }

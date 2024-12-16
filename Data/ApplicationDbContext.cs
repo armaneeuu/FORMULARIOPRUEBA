@@ -15,6 +15,7 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<FORMULARIOPRUEBA.Models.Estados> DataEstados { get; set; }
     public DbSet<FORMULARIOPRUEBA.Models.Estadosa> DataEstadosa { get; set; }
     public DbSet<FORMULARIOPRUEBA.Models.Dialogo> DataDialogo { get; set; }
+    public DbSet<FORMULARIOPRUEBA.Models.Status> DataStatus { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder); // Llamar al método base primero
@@ -35,6 +36,12 @@ public class ApplicationDbContext : IdentityDbContext
 
         modelBuilder.Entity<FORMULARIOPRUEBA.Models.Prueba>()
         .HasMany(p => p.Dialogo)
+        .WithOne(e => e.Prueba)
+        .HasForeignKey(e => e.PruebaId)
+        .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<FORMULARIOPRUEBA.Models.Prueba>()
+        .HasMany(p => p.Status)
         .WithOne(e => e.Prueba)
         .HasForeignKey(e => e.PruebaId)
         .OnDelete(DeleteBehavior.Cascade);
