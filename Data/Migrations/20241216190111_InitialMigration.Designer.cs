@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FORMULARIOPRUEBA.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241216050729_InitialMigrations")]
-    partial class InitialMigrations
+    [Migration("20241216190111_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,6 +122,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("alergias");
 
+                    b.Property<string>("Analisis")
+                        .HasColumnType("text")
+                        .HasColumnName("analisis");
+
                     b.Property<string>("Analizar")
                         .HasColumnType("text")
                         .HasColumnName("analizar");
@@ -149,6 +153,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("baseline");
 
+                    b.Property<string>("BaselineApren")
+                        .HasColumnType("text")
+                        .HasColumnName("baselineapren");
+
                     b.Property<string>("CV")
                         .HasColumnType("text")
                         .HasColumnName("cv");
@@ -157,13 +165,25 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("confederado");
 
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("text")
+                        .HasColumnName("descripcion");
+
                     b.Property<string>("Distinguir")
                         .HasColumnType("text")
                         .HasColumnName("distinguir");
 
+                    b.Property<string>("Emociones")
+                        .HasColumnType("text")
+                        .HasColumnName("emociones");
+
                     b.Property<string>("Equipos_de_suministro")
                         .HasColumnType("text")
                         .HasColumnName("equipos_de_suministro");
+
+                    b.Property<string>("EscenariosP")
+                        .HasColumnType("text")
+                        .HasColumnName("escenariosp");
 
                     b.Property<string>("Estado_general")
                         .HasColumnType("text")
@@ -209,6 +229,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("indicar");
 
+                    b.Property<string>("Introduccion")
+                        .HasColumnType("text")
+                        .HasColumnName("introduccion");
+
                     b.Property<string>("Laboratorio")
                         .HasColumnType("text")
                         .HasColumnName("laboratorio");
@@ -233,9 +257,17 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                         .HasColumnType("text")
                         .HasColumnName("piel");
 
+                    b.Property<string>("PreguntasDD")
+                        .HasColumnType("text")
+                        .HasColumnName("preguntasdd");
+
                     b.Property<string>("Preguntas_de_preparacion")
                         .HasColumnType("text")
                         .HasColumnName("preguntas_de_preparacion");
+
+                    b.Property<string>("ReferenciasB")
+                        .HasColumnType("text")
+                        .HasColumnName("referenciasb");
 
                     b.Property<string>("Signos_vitales")
                         .HasColumnType("text")
@@ -244,6 +276,10 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     b.Property<string>("Sinopsis")
                         .HasColumnType("text")
                         .HasColumnName("sinopsis");
+
+                    b.Property<string>("Sintesis")
+                        .HasColumnType("text")
+                        .HasColumnName("sintesis");
 
                     b.Property<string>("Situacion")
                         .HasColumnType("text")

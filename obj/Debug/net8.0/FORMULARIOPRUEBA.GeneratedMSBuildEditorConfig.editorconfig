@@ -17,75 +17,79 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FORMULARIOPRUEBA
 build_property.RootNamespace = FORMULARIOPRUEBA
-build_property.ProjectDir = C:\Users\LENOVO\Desktop\FORMULARIOPRUEBA\FORMULARIOPRUEBA\
+build_property.ProjectDir = C:\Users\CENSI USMP\Desktop\FORMULARIOPRUEBA\FORMULARIOPRUEBA\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\LENOVO\Desktop\FORMULARIOPRUEBA\FORMULARIOPRUEBA
+build_property.MSBuildProjectDirectory = C:\Users\CENSI USMP\Desktop\FORMULARIOPRUEBA\FORMULARIOPRUEBA
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Admin/Delete.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Admin/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Admin/Details.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Admin/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Admin/Edit.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Admin/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Admin/Index.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Formulario/Create.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Formulario/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXVsYXJpb1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Formulario/Edit.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Formulario/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXVsYXJpb1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Formulario/Index2.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Formulario/Header.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXVsYXJpb1xIZWFkZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Formulario/Index2.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybXVsYXJpb1xJbmRleDIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Home/Index.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Home/Privacy.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Shared/Error.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/_ViewImports.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/_ViewStart.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Shared/_Layout.cshtml]
+[C:/Users/CENSI USMP/Desktop/FORMULARIOPRUEBA/FORMULARIOPRUEBA/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-zh6tvfx85k

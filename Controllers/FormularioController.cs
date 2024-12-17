@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Authorization;
 using iText.Kernel.Pdf;
 using iText.Kernel.Pdf.Canvas.Parser;
 using iText.Kernel.Pdf.Canvas.Parser.Listener;
+using RazorEngine;
+using RazorEngine.Templating;
 
 
 namespace FORMULARIOPRUEBA.Controllers

@@ -25,6 +25,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4" />
+    <PackageReference Include="RazorEngine" Version="3.10.0" />
     <PackageReference Include="wkhtmltopdf.x64" Version="0.12.6" />
   </ItemGroup>
 

@@ -372,6 +372,7 @@ namespace FORMULARIOPRUEBA.Controllers
                 .Include(f => f.Estados)
                 .Include(f => f.Estadosa)
                 .Include(f => f.Dialogo)
+                .Include(f => f.Status)
                 .FirstOrDefault(f => f.Id == id);
 
             if (formulario == null)
@@ -381,7 +382,8 @@ namespace FORMULARIOPRUEBA.Controllers
 
             var baseUrl = $"{Request.Scheme}://{Request.Host}";
             var logoUrl = $"{baseUrl}/images/logo.jpeg";
-
+            var backgroundImageUrl = $"{baseUrl}/images/USMP.png";
+            
             // Crear contenido HTML para el PDF
             var estadosHtml = new StringBuilder();
             foreach (var estado in formulario.Estados)
@@ -418,11 +420,22 @@ namespace FORMULARIOPRUEBA.Controllers
             }
             dialogoHtml.AppendLine("</table>");
 
+            var statusHtml = new StringBuilder();
+            foreach (var statu in formulario.Status)
+            {
+                statusHtml.AppendLine($@"
+            <h2>Estado {statu.Numero}: {statu.Nombre}</h2>
+            <p>{statu.Descripcion}</p>");
+            }
+
             string imageSection = formulario.Imagen != null
             ? $"<div class='image-container'><img src='data:image/png;base64,{Convert.ToBase64String(formulario.Imagen)}' alt='Imagen de {formulario.Titulo}' style='width: 300px; height: auto;' /></div>"
             : "";
             string imageSectiona = formulario.Imagena != null
             ? $"<div class='image-container'><img src='data:image/png;base64,{Convert.ToBase64String(formulario.Imagena)}' alt='Imagen de {formulario.Titulo}' style='width: 300px; height: auto;' /></div>"
+            : "";
+            string imageSectionc = formulario.Imagenc != null
+            ? $"<div class='image-container'><img src='data:image/png;base64,{Convert.ToBase64String(formulario.Imagenc)}' alt='Imagen de {formulario.Titulo}' style='width: 300px; height: auto;' /></div>"
             : "";
             string ArchivoSection = formulario.ArchivoTextoExtraido != null
     ? $"<pre style='font-family: monospace; white-space: pre-wrap;'>{formulario.ArchivoTextoExtraido}</pre>"
@@ -432,16 +445,16 @@ namespace FORMULARIOPRUEBA.Controllers
             : $"<a href='data:application/octet-stream;base64,{Convert.ToBase64String(formulario.Archivo)}' download='{formulario.ArchivoName}'>Descargar {formulario.ArchivoName}</a>"
         : "<p>No hay archivo asociado.</p>";
 
+            
 
-
-            var htmlContent = $@"
+            string htmlContent = $@"
 <!DOCTYPE html>
 <html lang='es'>
 <head>
     <meta charset='utf-8' />
     <title>Formulario - {formulario.Titulo}</title>
     <style>
-        body {{ font-family: Arial, sans-serif; }}
+        body {{ font-family: Arial, sans-serif;}}
         table {{ width: 100%; border-collapse: collapse; }}
         td, th {{ padding: 10px; border: 1px solid #000; }}
         h1 {{ font-size: 1.2em; margin: 0; }}
@@ -569,8 +582,44 @@ namespace FORMULARIOPRUEBA.Controllers
         <h1>Guión</h1>
         {dialogoHtml}
 
+        <h2>Equipos de suministro</h2>
+        <p>{formulario.Confederado.Replace(Environment.NewLine, "<br />")}</p>
+
         <h1>Texto extraido</h1>
         {ArchivoSection}
+
+        <h2>Introducción</h2>
+        <p>{formulario.Introduccion.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Emociones</h2>
+        <p>{formulario.Emociones.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Descripción</h2>
+        <p>{formulario.Descripcion.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Análisis</h2>
+        <p>{formulario.Analisis.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Síntesis</h2>
+        <p>{formulario.Sintesis.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Preguntas del debriefing</h2>
+        <p>{formulario.PreguntasDD.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Baseline</h2>
+        <p>{formulario.BaselineApren.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h1>Estados</h1>
+        {statusHtml}
+
+        <h2>Referencias bibliográficas</h2>
+        <p>{formulario.ReferenciasB.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h2>Escenarios precargados</h2>
+        <p>{formulario.EscenariosP.Replace(Environment.NewLine, "<br />")}</p>
+
+        <h1>Lista de chequeo</h1>
+        {imageSectionc}
 
     </section>
 </body>

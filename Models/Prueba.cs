@@ -121,6 +121,33 @@ namespace FORMULARIOPRUEBA.Models
 
         public string? ArchivoTextoExtraido { get; set; }
 
+        [Column("introduccion")]
+        public string? Introduccion { get; set; }
+
+        [Column("emociones")]
+        public string? Emociones { get; set; }
+
+        [Column("descripcion")]
+        public string? Descripcion { get; set; }
+
+        [Column("analisis")]
+        public string? Analisis { get; set; }
+
+        [Column("sintesis")]
+        public string? Sintesis { get; set; }
+
+        [Column("preguntasdd")]
+        public string? PreguntasDD { get; set; }
+
+        [Column("baselineapren")]
+        public string? BaselineApren { get; set; }
+
+        [Column("referenciasb")]
+        public string? ReferenciasB { get; set; }
+
+        [Column("escenariosp")]
+        public string? EscenariosP { get; set; }
+
         public List<Status>? Status { get; set; }
 
         [Column("Imagenc")]

@@ -225,6 +225,12 @@
                 <button type="button" class="btn btn-secondary" id="addDialogoButton">Agregar Dialogo</button>
             </div>
 
+            <div class="form-group">
+                <label asp-for="Confederado" class="control-label"></label>
+                <textarea asp-for="Confederado" class="form-control"></textarea>
+                <span asp-validation-for="Confederado" class="text-danger"></span>
+            </div>
+
             <h3>Archivos Adicionales</h3>
             <div>
                 <label type="button" id="custom-button-archivo">Cargar Archivo Adicional</label>
@@ -235,6 +241,48 @@
             <div class="form-group">
                 <label>Texto extraído del PDF:</label>
                 <textarea asp-for="ArchivoTextoExtraido" class="form-control" readonly></textarea>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Introduccion" class="control-label"></label>
+                <textarea asp-for="Introduccion" class="form-control"></textarea>
+                <span asp-validation-for="Introduccion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Emociones" class="control-label"></label>
+                <textarea asp-for="Emociones" class="form-control"></textarea>
+                <span asp-validation-for="Emociones" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <textarea asp-for="Descripcion" class="form-control"></textarea>
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Analisis" class="control-label"></label>
+                <textarea asp-for="Analisis" class="form-control"></textarea>
+                <span asp-validation-for="Analisis" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Sintesis" class="control-label"></label>
+                <textarea asp-for="Sintesis" class="form-control"></textarea>
+                <span asp-validation-for="Sintesis" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PreguntasDD" class="control-label"></label>
+                <textarea asp-for="PreguntasDD" class="form-control"></textarea>
+                <span asp-validation-for="PreguntasDD" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BaselineApren" class="control-label"></label>
+                <textarea asp-for="BaselineApren" class="form-control"></textarea>
+                <span asp-validation-for="BaselineApren" class="text-danger"></span>
             </div>
 
             <h3>Estados</h3>
@@ -256,6 +304,18 @@
 
             <div class="form-group">
                 <button type="button" class="btn btn-secondary" id="addStatusButton">Agregar Estado</button>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ReferenciasB" class="control-label"></label>
+                <textarea asp-for="ReferenciasB" class="form-control"></textarea>
+                <span asp-validation-for="ReferenciasB" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EscenariosP" class="control-label"></label>
+                <textarea asp-for="EscenariosP" class="form-control"></textarea>
+                <span asp-validation-for="EscenariosP" class="text-danger"></span>
             </div>
 
             <h3>Imágenes</h3>

@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FORMULARIOPRUEBA.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigrations : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -91,6 +91,15 @@ namespace FORMULARIOPRUEBA.Data.Migrations
                     archivo = table.Column<byte[]>(type: "bytea", nullable: true),
                     archivo_name = table.Column<string>(type: "text", nullable: true),
                     ArchivoTextoExtraido = table.Column<string>(type: "text", nullable: true),
+                    introduccion = table.Column<string>(type: "text", nullable: true),
+                    emociones = table.Column<string>(type: "text", nullable: true),
+                    descripcion = table.Column<string>(type: "text", nullable: true),
+                    analisis = table.Column<string>(type: "text", nullable: true),
+                    sintesis = table.Column<string>(type: "text", nullable: true),
+                    preguntasdd = table.Column<string>(type: "text", nullable: true),
+                    baselineapren = table.Column<string>(type: "text", nullable: true),
+                    referenciasb = table.Column<string>(type: "text", nullable: true),
+                    escenariosp = table.Column<string>(type: "text", nullable: true),
                     Imagenc = table.Column<byte[]>(type: "bytea", nullable: true),
                     imagenamec = table.Column<string>(type: "text", nullable: true)
                 },
