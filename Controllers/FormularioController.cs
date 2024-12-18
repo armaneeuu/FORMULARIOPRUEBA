@@ -37,6 +37,94 @@ namespace FORMULARIOPRUEBA.Controllers
         {
             return View(_context.DataPrueba.ToList());
         }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var formulario = await _context.DataPrueba
+                .Include(p => p.Estados)
+                .Include(p => p.Estadosa)
+                .Include(p => p.Dialogo)
+                .Include(p => p.Status)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (formulario == null)
+            {
+                return NotFound();
+            }
+
+            return View(formulario);
+        }
+
+        public IActionResult GetImage(int id)
+        {
+            var prueba = _context.DataPrueba.FirstOrDefault(p => p.Id == id);
+
+            if (prueba == null || prueba.Imagen == null)
+            {
+                return NotFound();
+            }
+
+            return File(prueba.Imagen, "image/jpeg"); // Ajusta el tipo MIME según sea necesario
+        }
+        public IActionResult GetImagea(int id)
+        {
+            var prueba = _context.DataPrueba.FirstOrDefault(p => p.Id == id);
+
+            if (prueba == null || prueba.Imagena == null)
+            {
+                return NotFound();
+            }
+
+            return File(prueba.Imagena, "image/jpeg"); // Ajusta el tipo MIME según sea necesario
+        }
+        public IActionResult GetImagec(int id)
+        {
+            var prueba = _context.DataPrueba.FirstOrDefault(p => p.Id == id);
+
+            if (prueba == null || prueba.Imagenc == null)
+            {
+                return NotFound();
+            }
+
+            return File(prueba.Imagenc, "image/jpeg"); // Ajusta el tipo MIME según sea necesario
+        }
+
+        [HttpGet]
+        public IActionResult GetArchivo(int id)
+        {
+            var prueba = _context.DataPrueba.Find(id);
+            if (prueba == null || prueba.Archivo == null)
+            {
+                return NotFound();
+            }
+
+            string contentType;
+            var extension = Path.GetExtension(prueba.ArchivoName).ToLower();
+
+            switch (extension)
+            {
+                case ".pdf":
+                    contentType = "application/pdf";
+                    break;
+                case ".png":
+                case ".jpg":
+                case ".jpeg":
+                    contentType = $"image/{extension.Replace(".", "")}";
+                    break;
+                case ".txt":
+                    contentType = "text/plain";
+                    break;
+                default:
+                    contentType = "application/octet-stream"; // Otros archivos
+                    break;
+            }
+
+            return File(prueba.Archivo, contentType);
+        }
         public IActionResult Create()
         {
             return View();

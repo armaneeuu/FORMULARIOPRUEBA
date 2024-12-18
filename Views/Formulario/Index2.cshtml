@@ -14,23 +14,24 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th></th>
+                    
                     <th>
                         @Html.DisplayNameFor(model => model.Titulo)
                     </th>
-
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
-                            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Modificar</a>
-                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
-                        </td>
-                        <td style="width: 1000px;">
+                        <td >
                             @Html.DisplayFor(modelItem => item.Titulo)
+                        </td>
+                        <td class="text-right d-flex justify-content-end">
+                            <a class="btn btn-primary mx-1" asp-action="Edit" asp-route-id="@item.Id">Modificar</a>
+                        <a class="btn btn-success mx-1" asp-action="Details" asp-route-id="@item.Id">Detalles</a>
+                        <a class="btn btn-danger mx-1" asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
                         </td>
                     </tr>
                 }

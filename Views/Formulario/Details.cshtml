@@ -1,0 +1,239 @@
+@model FORMULARIOPRUEBA.Models.Prueba
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: center;
+    }
+</style>
+<h1>DETALLES DEL CASO</h1>
+
+<div class="row">
+
+
+    <dl class="row">
+        <dt class="col-12">
+            <h4>Título</h4>
+        </dt>
+        <dd class="col-12">@Model.Titulo</dd>
+
+        <h4>Resumen del caso</h4>
+
+        <hr />
+
+        <dt class="col-12">Sinopsis</dt>
+        <dd class="col-12">
+            @Html.Raw(Model.Sinopsis.Replace(Environment.NewLine, "<br />"))
+        </dd>
+
+        <dt class="col-12">Estados</dt>
+
+        @foreach (var estado in Model.Estados)
+        {
+
+            <dt class="col-12">Estado @estado.Numero : @estado.Nombre</dt>
+
+            <dd class="col-12">@estado.Descripcion<br /></dd>
+
+        }
+        @if (!string.IsNullOrEmpty(Model.ImagenName))
+        {
+            <dt class="col-12">Flujograma</dt>
+            <dd class="col-12">
+
+                @if (Model.Imagen != null)
+                {
+                    <img src="@Url.Action("GetImage", new { id = Model.Id })" alt="Imagen" class="img-fluid mt-2" />
+                }
+            </dd>
+        }
+        <dt class="col-12">Autores</dt>
+        <dd class="col-12">@Model.Autores</dd>
+
+        <dt class="col-12">Historial médico</dt>
+        <dd class="col-12">@Model.Historial_medico</dd>
+
+        <dt class="col-12">Alergias</dt>
+        <dd class="col-12">@Model.Alergias</dd>
+
+        <dt class="col-12">Medicamentos</dt>
+        <dd class="col-12">@Model.Medicamentos</dd>
+
+        <dt class="col-12">Historial familiar/social</dt>
+        <dd class="col-12">@Model.Historia_familiar</dd>
+
+        <h3>Nota del ingreso</h3>
+
+        <dt class="col-12">Situación</dt>
+        <dd class="col-12">@Model.Situacion</dd>
+
+        <dt class="col-12">Nota del hospitalización</dt>
+        <dd class="col-12">@Model.Nota_de_hospitalizacion</dd>
+
+        <h3>Exámen físico</h3>
+
+        <dt class="col-12">Historial familiar/social</dt>
+        <dd class="col-12">@Model.Historia_familiar</dd>
+
+        <dt class="col-12">Signos vitales</dt>
+        <dd class="col-12">@Model.Signos_vitales</dd>
+
+        <dt class="col-12">Estado general</dt>
+        <dd class="col-12">@Model.Estado_general</dd>
+
+        <dt class="col-12">Piel</dt>
+        <dd class="col-12">@Model.Piel</dd>
+
+        <dt class="col-12">Tórax</dt>
+        <dd class="col-12">@Model.Torax</dd>
+
+        <dt class="col-12">CV</dt>
+        <dd class="col-12">@Model.CV</dd>
+
+        <dt class="col-12">Abdomen</dt>
+        <dd class="col-12">@Model.Abdomen</dd>
+
+        <dt class="col-12">Laboratorio</dt>
+        <dd class="col-12">@Model.Laboratorio</dd>
+
+        @if (!string.IsNullOrEmpty(Model.ImagenNamea))
+        {
+            <dt class="col-12">Imágenes</dt>
+            <dd class="col-12">
+
+                @if (Model.Imagena != null)
+                {
+                    <img src="@Url.Action("GetImagea", new { id = Model.Id })" alt="Imagena" class="img-fluid mt-2" />
+                }
+            </dd>
+        }
+
+        <h3>Órdenes</h3>
+        <dt class="col-12">Órdenes inicial</dt>
+        <dd class="col-12">@Model.Orden_inicial</dd>
+
+        <h3>Preparación</h3>
+        <h3>Objetivos del aprendizaje</h3>
+        <dt class="col-12">Distinguir</dt>
+        <dd class="col-12">@Model.Distinguir</dd>
+
+        <dt class="col-12">Indicar</dt>
+        <dd class="col-12">@Model.Indicar</dd>
+
+        <dt class="col-12">Analizar</dt>
+        <dd class="col-12">@Model.Analizar</dd>
+
+        <dt class="col-12">Evaluación</dt>
+        <dd class="col-12">@Model.Evaluación</dd>
+
+        <dt class="col-12">Aplicar</dt>
+        <dd class="col-12">@Model.Aplicar</dd>
+
+        <h3>Desempeño como medida del aprendizaje</h3>
+        <dt class="col-12">Medidas esenciales de rendimiento del escenario</dt>
+        <dd class="col-12">@Model.Medidas_esenciales</dd>
+
+        <dt class="col-12">Baseline</dt>
+        <dd class="col-12">@Model.Baseline</dd>
+    </dl>
+    <dt class="col-12">Estados</dt>
+
+    @foreach (var estadoa in Model.Estadosa)
+    {
+
+        <dt class="col-12">Estado @estadoa.Numero : @estadoa.Nombre</dt>
+
+        <dd class="col-12">@estadoa.Descripcion<br /></dd>
+
+    }
+    <dt class="col-12">Preguntas de preparación</dt>
+    <dd class="col-12">@Model.Preguntas_de_preparacion</dd>
+
+    <dt class="col-12">Equipos de suministro</dt>
+    <dd class="col-12">@Model.Equipos_de_suministro</dd>
+
+    <h3>Guión</h3>
+    <table>
+        <tr>
+            <td style="background-color: yellow;">Personaje</td>
+            <td style="background-color: yellow;">Guión</td>
+        </tr>
+        @foreach (var dialogo in Model.Dialogo)
+        {
+
+            <tr>
+                <td>@dialogo.Personaje</td>
+                <td>@dialogo.Guion</td>
+            </tr>
+
+        }
+    </table>
+
+    @if (!string.IsNullOrEmpty(Model.ArchivoName))
+    {
+        <dt class="col-12">Archivo Subido</dt>
+        <dd class="col-12">
+            @if (Model.ArchivoName.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase))
+            {
+                <iframe src="@Url.Action("GetArchivo", new { id = Model.Id })" width="100%" height="600px"
+                    frameborder="0"></iframe>
+            }
+            else if (Model.ArchivoName.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
+            Model.ArchivoName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
+            Model.ArchivoName.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase))
+            {
+                <img src="@Url.Action("GetArchivo", new { id = Model.Id })" alt="Archivo Imagen" style="max-width: 100%;" />
+            }
+            else
+            {
+                <p>No se puede visualizar este tipo de archivo. <a href="@Url.Action("GetArchivo", new { id = Model.Id })"
+                        target="_blank">Descargar</a></p>
+            }
+        </dd>
+    }
+
+   <dt class="col-12">Texto extraído</dt>
+<dd class="col-12">
+    @Html.Raw(Model.ArchivoTextoExtraido.Replace("\r\n", "<br />").Replace("\n", "<br />"))
+</dd>
+
+
+    <dt class="col-12">Estados</dt>
+
+        @foreach (var statu in Model.Status)
+        {
+
+            <dt class="col-12">Estado @statu.Numero : @statu.Nombre</dt>
+
+            <dd class="col-12">@statu.Descripcion<br /></dd>
+
+        }
+
+         @if (!string.IsNullOrEmpty(Model.ImagenNamec))
+        {
+            <dt class="col-12">Imágenes</dt>
+            <dd class="col-12">
+
+                @if (Model.Imagenc != null)
+                {
+                    <img src="@Url.Action("GetImagec", new { id = Model.Id })" alt="Imagenc" class="img-fluid mt-2" />
+                }
+            </dd>
+        }
+
+</div>
+
+<div>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.Id">Modificar</a> |
+    <a class="btn btn-primary" asp-action="Index">Regresar a la lista</a> |
+    <a asp-action="ExportPdf" asp-route-id="@Model.Id" class="btn btn-primary">Exportar a PDF</a>
+</div>
